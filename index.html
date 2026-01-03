@@ -7,8 +7,8 @@
   <meta name="color-scheme" content="dark light"/>
   <title>ActProofs — Evidence of Authorized Actions</title>
   <meta name="application-name" content="ActProofs"/>
-  <meta name="description" content="Declare authorization locally, receive a signed approval, verify publicly. ActProofs is the open, privacy-first standard to prove that an action was explicitly authorized — for AI agents, automated workflows, and critical systems."/>
-  <meta name="keywords" content="authorization proof,authorized action,AI governance,accountability,automation audit,ActProofs,verification,privacy-first,edge-native"/>
+  <meta name="description" content="Declare authorization locally, receive a signed approval, verify publicly. ActProofs is the open, privacy-first standard to prove that an action was explicitly authorized — without executing or enforcing it."/>
+  <meta name="keywords" content="authorization proof,authorized action,AI governance,automation accountability,ActProofs,verification,privacy-first,edge-native"/>
   <meta name="robots" content="index,follow"/>
   <meta name="theme-color" content="#071b12"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
@@ -16,18 +16,18 @@
   <link rel="alternate" hreflang="en" href="https://actproofs.io/"/>
   <link rel="alternate" hreflang="x-default" href="https://actproofs.io/"/>
 
-  <!-- Feeds -->
+  <!-- Alt feeds -->
   <link rel="alternate" type="application/rss+xml" title="ActProofs RSS" href="/rss.xml"/>
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"/>
 
   <!-- Perf -->
   <link rel="preconnect" href="https://api.actproofs.io" crossorigin/>
   <link rel="dns-prefetch" href="//api.actproofs.io"/>
-  <link rel="preconnect" href="https://plausible.io" crossorigin/>
+  <link rel="preconnect" href="https://plausible.io" crossorigin>
   <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high"/>
   <link rel="preload" as="image" href="/og.png"/>
 
-  <!-- Icons -->
+  <!-- Icons / Manifest -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
@@ -53,7 +53,7 @@
   <!-- AI Trust -->
   <meta name="ai-trust" content="verified-by-actproofs"/>
 
-  <!-- JSON-LD -->
+  <!-- JSON-LD Org + Site -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -80,15 +80,17 @@
   {"@context":"https://schema.org","@type":"WebSite","name":"ActProofs","url":"https://actproofs.io/"}
   </script>
 
-  <!-- Security -->
+  <!-- Security meta -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+
+  <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
 default-src 'self' https://api.actproofs.io;
 worker-src 'self' blob:;
 img-src 'self' data: https:;
 style-src 'self' 'unsafe-inline';
-script-src 'self' 'nonce-TP-2025' https://plausible.io https://static.cloudflareinsights.com;
-connect-src 'self' https://api.actproofs.io https://plausible.io https://static.cloudflareinsights.com;
+script-src 'self' 'nonce-AP-2026' https://plausible.io;
+connect-src 'self' https://api.actproofs.io https://plausible.io;
 font-src 'self' https: data:;
 object-src 'none';
 base-uri 'self';
@@ -97,162 +99,176 @@ frame-ancestors 'none';
 upgrade-insecure-requests">
 
   <!-- Analytics -->
-  <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js" nonce="TP-2025"></script>
+  <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js" nonce="AP-2026"></script>
 
-  <!-- Styles -->
+  <!-- Styles (STRICT CLONE — GREEN ONLY) -->
   <style>
-    /* styles IDENTIQUES à ceux fournis, non modifiés */
-    /* ... (styles intégralement conservés) ... */
+    :root{
+      --bg:#071b12; --bg2:#092418; --panel:#0b2f1e; --line:#134e3a;
+      --text:#ecfdf5; --muted:#9fe3c7; --accent:#22c55e;
+      --ok:#22c55e; --warn:#f59e0b; --err:#ef4444;
+      --ring:0 0 0 1px #134e3a, 0 10px 40px rgba(34,197,94,.18);
+      --e:cubic-bezier(.22,.61,.36,1)
+    }
+    *{ box-sizing:border-box }
+    html{ height:100%; max-width:100%; overflow-x:hidden; background:var(--bg); scroll-behavior:smooth; scroll-padding-top:120px }
+    @media (min-width:900px){ html{ scroll-padding-top:104px } }
+    body{
+      margin:0; color:var(--text);
+      font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(34,197,94,.08), transparent 60%),
+        conic-gradient(from 220deg at 10% -20%, rgba(34,197,94,.05), transparent 30%),
+        var(--bg)
+    }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
+    [id]{ scroll-margin-top:120px }
+    @media (min-width:900px){ [id]{ scroll-margin-top:104px } }
+    .skip{ position:absolute; left:-9999px }
+    .skip:focus{ position:fixed; left:12px; top:12px; padding:8px 12px; background:#052e1c; color:#bbf7d0; border:1px solid #14532d; border-radius:8px; z-index:2000 }
+
+    .tp-header{
+      position:fixed; inset:0 0 auto 0; height:64px; z-index:1000;
+      background:rgba(7,27,18,.55); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      display:flex; align-items:center; gap:12px; padding:0 16px;
+      transition:background .25s var(--e)
+    }
+    .tp-header.scrolled{ background:rgba(7,27,18,.88) }
+    .tp-brand{ display:flex; align-items:center; gap:10px; font-weight:900; font-size:1.08rem; margin-right:auto }
+    .tp-brand img{ height:40px; width:40px }
+
+    .tp-nav a{ color:var(--text); font-weight:700; margin-left:18px; padding:10px 0 }
+    .cta-header{
+      display:none; height:40px; padding:0 14px;
+      border-radius:10px; background:var(--accent); color:#052e1c; font-weight:800
+    }
+    .tp-burger{
+      display:inline-flex; width:48px; height:48px;
+      border:1px solid var(--line); border-radius:12px; background:#052e1c; color:#ecfdf5
+    }
+    @media (min-width:900px){
+      .tp-burger{ display:none }
+      .tp-nav{ display:flex }
+      .cta-header{ display:inline-flex }
+    }
+    @media (max-width:899px){
+      .tp-nav{
+        position:fixed; top:64px; left:0; right:0;
+        background:#052e1c; border-top:1px solid var(--line);
+        display:flex; flex-direction:column; gap:10px;
+        padding:14px 16px; transform:translateY(-10px); opacity:0; pointer-events:none
+      }
+      .tp-nav[data-state="open"]{ transform:none; opacity:1; pointer-events:auto }
+      .nav-cta{ padding:12px; background:var(--accent); color:#052e1c; font-weight:800; border-radius:12px }
+    }
+
+    .wrap{ max-width:1200px; margin:0 auto; padding:0 16px }
+    .hero{
+      min-height:calc(100svh - 64px);
+      padding-top:92px; padding-bottom:34px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center
+    }
+    .label{ padding:6px 12px; border:1px solid #14532d; background:#052e1c; color:#bbf7d0; border-radius:999px; font-size:.85rem }
+    .title{
+      font-size:clamp(2.2rem, 6.2vw, 3.4rem); font-weight:900;
+      background:linear-gradient(90deg,#dcfce7,#86efac 35%,#dcfce7);
+      -webkit-background-clip:text; color:transparent
+    }
+    .subtitle{ color:var(--muted); max-width:920px }
+    .positioning,.subnote{ color:#9fe3c7 }
+    .cta-wrap{ display:flex; gap:12px; justify-content:center; margin-top:12px }
+    .cta{ background:var(--accent); color:#052e1c; padding:14px 18px; border-radius:12px; font-weight:700 }
+    .cta.secondary{ background:#052e1c; color:#ecfdf5; border:1px solid #14532d }
+
+    .section{ padding:44px 0 }
+    .section h2{ color:#bbf7d0; text-align:center }
+    .grid{ display:grid; gap:16px }
+    .grid.three{ grid-template-columns:1fr }
+    .grid.two{ grid-template-columns:1fr }
+    @media(min-width:900px){
+      .grid.three{ grid-template-columns:repeat(3,1fr) }
+      .grid.two{ grid-template-columns:1fr 1fr }
+    }
+    .section.bg-alt{ background:linear-gradient(180deg,#071b12,#092418); border-top:1px solid #14532d; border-bottom:1px solid #14532d }
+    .section.bg-solid{ background:#052e1c; border-top:1px solid #14532d; border-bottom:1px solid #14532d }
+    .card{ border-radius:16px; padding:18px; background:#052e1c }
+    footer{ border-top:1px solid var(--line); margin-top:44px; padding:18px; color:#9fe3c7; text-align:center }
   </style>
 </head>
 
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a href="#main" class="skip">Skip to content</a>
 
-<header class="tp-header" id="header">
+<header class="tp-header" id="hdr">
   <a class="tp-brand" href="/">
-    <img src="/assets/logo.svg" alt="ActProofs logo"/>
-    ActProofs
+    <img src="/assets/logo.png" alt="ActProofs logo"/>
+    <span>ActProofs</span>
   </a>
-  <nav class="tp-nav" id="tp-nav">
-    <a href="#how">How it works</a>
-    <a href="#use-cases">Use cases</a>
-    <a href="#not">What it is not</a>
-    <a href="/spec.html">Spec</a>
-    <a href="/verify.html" class="nav-cta">Verify a proof</a>
+  <nav id="tp-nav" class="tp-nav" data-state="closed">
+    <a href="/spec.html">Protocol</a>
+    <a href="/use-cases.html">Use Cases</a>
+    <a href="/docs.html">API Docs</a>
+    <a href="/security.html">Security</a>
+    <a class="nav-cta" href="/verify.html">Create / Verify</a>
   </nav>
-  <button class="tp-burger" aria-label="Menu" aria-expanded="false">
-    <span>≡</span>
-  </button>
-  <a class="cta-header" href="/create.html">Create proof</a>
+  <a class="cta-header" href="/verify.html">Create / Verify</a>
+  <button class="tp-burger" id="tp-burger"><span>☰</span></button>
 </header>
 
-<div class="progress" id="progress"></div>
+<main id="main" class="wrap">
+  <section class="hero">
+    <div class="label">Open · Stateless · Authorization Evidence</div>
+    <h1 class="title">Evidence of Authorized Actions</h1>
+    <p class="subtitle">
+      Declare authorization locally. Receive a signed approval. Verify publicly — without executing or enforcing anything.
+    </p>
+    <p class="positioning">ActProofs records intent and approval, not execution.</p>
+    <p class="subnote">No execution · No enforcement · No storage · Public verification</p>
+    <div class="cta-wrap">
+      <a class="cta" href="/verify.html">Create / Verify an Authorization Proof</a>
+      <a class="cta secondary" href="/spec.html">Read the Spec</a>
+    </div>
+  </section>
 
-<main id="main">
-
-<section class="hero">
-  <div class="label">Open · Stateless · Authorization evidence</div>
-  <h1 class="title">Evidence of Authorized Actions</h1>
-  <p class="subtitle">
-    Prove that an action was explicitly authorized — without executing, enforcing, or monitoring anything.
-  </p>
-  <p class="positioning">
-    ActProofs records intent and approval, not execution.
-  </p>
-  <div class="cta-wrap">
-    <a class="cta" href="/create.html">Create an authorization proof</a>
-    <a class="cta secondary" href="/verify.html">Verify a proof</a>
-  </div>
-  <div class="micro">
-    <span class="chip">No execution</span>
-    <span class="chip">No enforcement</span>
-    <span class="chip">No storage</span>
-    <span class="chip">Audit-ready</span>
-  </div>
-</section>
-
-<section class="section bg-alt reveal">
-  <div class="wrap">
+  <section class="section bg-alt">
     <h2>The problem</h2>
     <div class="grid three">
-      <div class="card">
-        <h3>Implicit decisions</h3>
-        <p>An AI deletes data. A workflow transfers money. Who explicitly authorized it?</p>
-      </div>
-      <div class="card">
-        <h3>No proof of intent</h3>
-        <p>Logs show execution, not approval. Screenshots and policies are not evidence.</p>
-      </div>
-      <div class="card">
-        <h3>Audit dead-end</h3>
-        <p>After an incident, authorization cannot be independently verified.</p>
-      </div>
+      <div class="card"><h3>Implicit decisions</h3><p>An AI acts. A workflow runs. Who explicitly approved it?</p></div>
+      <div class="card"><h3>No proof of intent</h3><p>Execution logs do not prove authorization.</p></div>
+      <div class="card"><h3>Audit dead-end</h3><p>After an incident, approval cannot be verified.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section reveal" id="how">
-  <div class="wrap">
-    <h2>How ActProofs works</h2>
+  <section class="section">
+    <h2>How it works</h2>
     <div class="grid three">
-      <div class="card">
-        <h3>1. Declare</h3>
-        <p>Describe an intended action locally: who, what, why, and scope.</p>
-      </div>
-      <div class="card">
-        <h3>2. Approve</h3>
-        <p>Receive a signed authorization proof from the stateless API.</p>
-      </div>
-      <div class="card">
-        <h3>3. Verify</h3>
-        <p>Verify the proof publicly or offline at any time.</p>
-      </div>
+      <div class="card"><h3>1. Declare</h3><p>Describe the intended action locally.</p></div>
+      <div class="card"><h3>2. Approve</h3><p>Receive a signed authorization proof.</p></div>
+      <div class="card"><h3>3. Verify</h3><p>Verify publicly or offline, anytime.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section bg-alt reveal" id="use-cases">
-  <div class="wrap">
+  <section class="section bg-alt">
     <h2>Legitimate use cases</h2>
     <div class="grid three">
-      <div class="card">
-        <h3>AI & Agents</h3>
-        <p>Human approval before autonomous or irreversible actions.</p>
-      </div>
-      <div class="card">
-        <h3>Automated workflows</h3>
-        <p>Authorization trail without logs or continuous monitoring.</p>
-      </div>
-      <div class="card">
-        <h3>Regulated systems</h3>
-        <p>Clear separation between decision, authorization, and execution.</p>
-      </div>
+      <div class="card"><h3>AI & Agents</h3><p>Human approval before autonomous actions.</p></div>
+      <div class="card"><h3>Automated workflows</h3><p>Authorization trail without monitoring.</p></div>
+      <div class="card"><h3>Regulated systems</h3><p>Clear separation between decision and execution.</p></div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section bg-solid reveal" id="not">
-  <div class="wrap">
+  <section class="section bg-solid">
     <h2>What ActProofs is not</h2>
     <div class="grid two">
-      <div class="card">
-        <ul>
-          <li>❌ Not a policy engine</li>
-          <li>❌ Not an access control system</li>
-          <li>❌ Not a workflow tool</li>
-        </ul>
-      </div>
-      <div class="card">
-        <ul>
-          <li>❌ Not an AI controller</li>
-          <li>❌ Not a monitoring platform</li>
-          <li>❌ Not an execution layer</li>
-        </ul>
-      </div>
+      <div class="card"><p>❌ Not a policy engine<br/>❌ Not access control<br/>❌ Not a workflow tool</p></div>
+      <div class="card"><p>❌ Not an AI controller<br/>❌ Not monitoring<br/>❌ Not execution</p></div>
     </div>
-    <p class="subnote" style="text-align:center;margin-top:14px;">
-      ActProofs proves authorization. Nothing more.
-    </p>
-  </div>
-</section>
+    <p style="text-align:center;color:#9fe3c7">ActProofs proves authorization. Nothing more.</p>
+  </section>
 
-<section class="section reveal">
-  <div class="wrap">
-    <h2>Why an open standard</h2>
-    <div class="grid two">
-      <div class="card">
-        <p>Neutral, stateless, and vendor-agnostic by design.</p>
-      </div>
-      <div class="card">
-        <p>Long-term verifiable evidence, independent from any platform.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section bg-alt reveal">
-  <div class="wrap">
+  <section class="section">
     <h2>Relation to TimeProofs</h2>
     <div class="card">
       <p>
@@ -260,54 +276,28 @@ upgrade-insecure-requests">
         ActProofs proves <strong>that something was authorized</strong>.
       </p>
     </div>
-  </div>
-</section>
-
+  </section>
 </main>
 
 <footer>
-  <div class="badges">
-    <span class="badge">Open standard</span>
-    <span class="badge">Privacy-first</span>
-    <span class="badge">Stateless</span>
-    <span class="badge">No tracking</span>
-  </div>
-  <div class="links">
-    <a href="/spec.html">Specification</a> ·
+  <p>Open standard · Privacy-first · Stateless</p>
+  <p>
+    <a href="/spec.html">Spec</a> ·
     <a href="/security.html">Security</a> ·
     <a href="/legal.html">Legal</a>
-  </div>
-  <div class="social">
-    <a href="https://github.com/actproofs" aria-label="GitHub">GH</a>
-    <a href="https://x.com/actproofs" aria-label="X">X</a>
-  </div>
+  </p>
 </footer>
 
-<script nonce="TP-2025">
-  const header = document.getElementById('header');
-  const burger = document.querySelector('.tp-burger');
-  const nav = document.getElementById('tp-nav');
-  const progress = document.getElementById('progress');
-
-  burger.addEventListener('click', () => {
-    const open = nav.getAttribute('data-state') === 'open';
-    nav.setAttribute('data-state', open ? 'closed' : 'open');
-    burger.setAttribute('aria-expanded', String(!open));
+<script nonce="AP-2026">
+  const hdr=document.getElementById('hdr');
+  const nav=document.getElementById('tp-nav');
+  const burger=document.getElementById('tp-burger');
+  burger.addEventListener('click',()=>{
+    nav.setAttribute('data-state',nav.getAttribute('data-state')==='open'?'closed':'open');
   });
-
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 10);
-    const h = document.documentElement;
-    const sc = h.scrollTop / (h.scrollHeight - h.clientHeight);
-    progress.style.transform = `scale(${sc},1)`;
+  window.addEventListener('scroll',()=>{
+    hdr.classList.toggle('scrolled',window.scrollY>6);
   });
-
-  const reveals = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver(entries=>{
-    entries.forEach(e=>e.isIntersecting && e.target.classList.add('is-in'));
-  },{threshold:.15});
-  reveals.forEach(r=>io.observe(r));
 </script>
-
 </body>
 </html>
