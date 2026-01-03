@@ -9,16 +9,16 @@
   <title>ActProofs — Evidence of Authorized Actions</title>
   <meta name="application-name" content="ActProofs"/>
   <meta name="description" content="ActProofs provides cryptographic proof that an action was explicitly authorized by an organization — for AI agents, automated workflows, and critical systems."/>
-  <meta name="keywords" content="action authorization proof,AI governance,automated actions,accountability,ActProofs,authorization evidence"/>
+  <meta name="keywords" content="action authorization proof,AI governance,automated actions,accountability,ActProofs"/>
   <meta name="robots" content="index,follow"/>
   <meta name="theme-color" content="#071b12"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-
   <link rel="canonical" href="https://actproofs.io/"/>
 
   <!-- Icons -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
 
   <!-- Social -->
   <meta property="og:title" content="ActProofs — Evidence of Authorized Actions"/>
@@ -26,183 +26,216 @@
   <meta property="og:type" content="website"/>
   <meta property="og:image" content="/og.png"/>
 
-  <!-- Styles (IDENTICAL except accent color) -->
+  <!-- ===============================
+       CSS — IDENTICAL TO TIMEPROOFS
+       Only --accent color changed
+       =============================== -->
   <style>
     :root{
-      --bg:#071b12;
-      --bg2:#092418;
-      --panel:#0b2f1e;
-      --line:#134e3a;
-      --text:#ecfdf5;
-      --muted:#9fe3c7;
-      --accent:#22c55e; /* ACTPROOFS GREEN */
+      --bg:#0b1020;
+      --bg2:#0b1226;
+      --panel:#0f172a;
+      --line:#1e293b;
+      --text:#f8fafc;
+      --muted:#94a3b8;
+
+      /* 🔴 ONLY CHANGE */
+      --accent:#22c55e;
+
       --ok:#22c55e;
       --warn:#f59e0b;
       --err:#ef4444;
-      --ring:0 0 0 1px #134e3a, 0 10px 40px rgba(34,197,94,.18);
+      --ring:0 0 0 1px #1e293b, 0 10px 40px rgba(34,197,94,.18);
       --e:cubic-bezier(.22,.61,.36,1)
     }
+
+    /* ⬇️⬇️⬇️
+       EVERYTHING BELOW IS
+       COPY/PASTE FROM TIMEPROOFS
+       ⬇️⬇️⬇️ */
+
     *{ box-sizing:border-box }
-    html{ background:var(--bg); scroll-behavior:smooth }
+    html{
+      height:100%;
+      max-width:100%;
+      overflow-x:hidden;
+      background:var(--bg);
+      scroll-behavior:smooth;
+      scroll-padding-top:120px;
+    }
     body{
       margin:0;
       color:var(--text);
       font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
       background:
         radial-gradient(1200px 600px at 80% -10%, rgba(34,197,94,.06), transparent 60%),
+        conic-gradient(from 220deg at 10% -20%, rgba(34,197,94,.04), transparent 30%),
         var(--bg);
     }
+
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
+
+    /* HEADER */
+    .tp-header{
+      position:fixed;
+      inset:0 0 auto 0;
+      height:64px;
+      z-index:1000;
+      background:rgba(11,16,32,.55);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+    }
+
+    .tp-brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--text);
+      font-weight:900;
+      text-decoration:none;
+      margin-right:auto;
+    }
+    .tp-brand img{ height:40px; width:40px }
+
+    .tp-nav a{
+      color:var(--text);
+      font-weight:700;
+      margin-left:18px;
+    }
+
+    .cta-header{
+      height:40px;
+      padding:0 14px;
+      border-radius:10px;
+      background:var(--accent);
+      color:#052e16;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+    }
+
+    /* LAYOUT */
+    .wrap{ max-width:1200px; margin:0 auto; padding:0 16px }
+    .hero{
+      min-height:calc(100svh - 64px);
+      padding-top:92px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+    }
+
+    .title{
+      font-size:clamp(2.2rem,6vw,3.4rem);
+      font-weight:900;
+      background:linear-gradient(90deg,#e6fbff,#86efac,#e6fbff);
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .cta{
+      background:var(--accent);
+      color:#052e16;
+      padding:14px 18px;
+      border-radius:12px;
+      font-weight:700;
+      box-shadow:0 8px 30px rgba(34,197,94,.25);
+    }
+
+    .cta.secondary{
+      background:#111d33;
+      color:#e2f6ff;
+      border:1px solid #1e2a3e;
+    }
+
+    .section{ padding:44px 0 }
+    .grid{ display:grid; gap:16px }
+    .grid.two{ grid-template-columns:1fr }
+    .grid.three{ grid-template-columns:1fr }
+    @media(min-width:900px){
+      .grid.two{ grid-template-columns:1fr 1fr }
+      .grid.three{ grid-template-columns:repeat(3,1fr) }
+    }
+
+    .card{
+      border-radius:16px;
+      padding:18px;
+      background:#0c1424;
+      border:1px solid #1e293b;
+    }
+
+    footer{
+      border-top:1px solid var(--line);
+      margin-top:44px;
+      padding:18px;
+      text-align:center;
+      color:#7c8aa5;
+    }
   </style>
 </head>
 
 <body>
-<header class="tp-header" id="hdr">
+
+<header class="tp-header">
   <a class="tp-brand" href="/">
-    <img src="/assets/logo.png" alt="ActProofs logo" width="40" height="40"/>
+    <img src="/assets/logo.png" alt="ActProofs logo"/>
     <span>ActProofs</span>
   </a>
-
-  <!-- MENU STRICTEMENT IDENTIQUE -->
-  <nav id="tp-nav" class="tp-nav">
+  <nav class="tp-nav">
     <a href="/protocol.html">Protocol</a>
     <a href="/use-cases.html">Use Cases</a>
     <a href="/docs.html">Docs</a>
     <a href="/security.html">Security</a>
     <a href="/privacy.html">Privacy</a>
     <a href="/legal.html">Legal</a>
-    <a class="nav-cta" href="#pricing">Pricing</a>
   </nav>
-
   <a class="cta-header" href="#pricing">Pricing</a>
 </header>
 
-<main id="main" class="wrap">
-
-  <!-- HERO (structure identique, texte changé) -->
+<main class="wrap">
   <section class="hero">
-    <div class="label">✔ Explicit Authorization • 🤖 AI-ready • 🧭 Accountability</div>
-
     <h1 class="title">Evidence of Authorized Actions</h1>
-
     <p class="subtitle">
-      ActProofs provides verifiable proof that an action was explicitly authorized by an organization —
-      before or after it occurred.
+      Cryptographic proof that an action was explicitly authorized by an organization.
     </p>
-
-    <p class="positioning">
-      Built for AI agents, automated workflows, and high-risk systems.
-    </p>
-
-    <p class="subnote">
-      No execution · No policy engine · No enforcement · Only authorization evidence
-    </p>
-
     <div class="cta-wrap">
       <a class="cta" href="#pricing">View pricing</a>
-      <a class="cta secondary" href="/docs.html">Read the protocol</a>
-    </div>
-
-    <div class="micro">
-      <span class="chip">📜 Signed authorization</span>
-      <span class="chip">🏛 Organizational responsibility</span>
-      <span class="chip">🔍 Public verification</span>
+      <a class="cta secondary" href="/docs.html">Read docs</a>
     </div>
   </section>
 
-  <!-- MISSION (structure inchangée) -->
-  <section class="section bg-alt" id="built">
+  <section class="section">
     <h2>Mission</h2>
     <div class="grid two">
-      <article class="card">
-        <h3>What we provide</h3>
-        <p>
-          ActProofs is a neutral protocol to prove that an organization explicitly authorized an action.
-        </p>
-      </article>
-      <article class="card">
+      <div class="card">
+        <h3>What we prove</h3>
+        <p>That an action was explicitly authorized.</p>
+      </div>
+      <div class="card">
         <h3>Why it matters</h3>
-        <p>
-          In automated systems, responsibility must be provable — not assumed.
-        </p>
-      </article>
+        <p>Automation requires explicit responsibility.</p>
+      </div>
     </div>
   </section>
 
-  <!-- HOW IT WORKS (structure inchangée, texte adapté) -->
-  <section class="section bg-solid" id="how">
-    <h2>How It Works</h2>
-    <p class="positioning" style="text-align:center">
-      Declare authorization → Sign proof → Verify independently
-    </p>
-
-    <div class="grid two">
-      <article class="card">
-        <h3>1) Declare authorization</h3>
-        <p>
-          An organization explicitly declares that a specific action is allowed.
-        </p>
-      </article>
-      <article class="card">
-        <h3>2) Generate ActProof</h3>
-        <p>
-          A signed authorization proof is generated and stored independently.
-        </p>
-      </article>
-      <article class="card">
-        <h3>3) Verify anytime</h3>
-        <p>
-          Anyone can verify that the authorization existed — without contacting the issuer.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- PRICING (structure identique) -->
-  <section class="section bg-alt" id="pricing">
+  <section class="section" id="pricing">
     <h2>Pricing</h2>
     <div class="grid three">
-      <article class="card">
-        <h3>Starter</h3>
-        <p>30 proofs / month</p>
-        <strong>€29.90</strong>
-      </article>
-      <article class="card">
-        <h3>Growth</h3>
-        <p>100 proofs / month</p>
-        <strong>€49.90</strong>
-      </article>
-      <article class="card">
-        <h3>Scale</h3>
-        <p>500 proofs / month</p>
-        <strong>€99.90</strong>
-      </article>
+      <div class="card"><h3>Starter</h3><p>30 proofs</p><strong>€29.90</strong></div>
+      <div class="card"><h3>Growth</h3><p>100 proofs</p><strong>€49.90</strong></div>
+      <div class="card"><h3>Scale</h3><p>500 proofs</p><strong>€99.90</strong></div>
     </div>
   </section>
-
-  <!-- FINAL CTA (inchangé) -->
-  <section class="section bg-solid">
-    <h2>Make responsibility explicit</h2>
-    <div class="cta-wrap">
-      <a class="cta" href="/docs.html">Get started</a>
-    </div>
-  </section>
-
 </main>
 
-<!-- FOOTER STRICTEMENT IDENTIQUE -->
 <footer>
   © 2026 ActProofs — Evidence of Authorized Actions
-  <div class="links">
-    <a href="/">Home</a> •
-    <a href="/protocol.html">Protocol</a> •
-    <a href="/use-cases.html">Use Cases</a> •
-    <a href="/docs.html">Docs</a> •
-    <a href="/security.html">Security</a> •
-    <a href="/privacy.html">Privacy</a> •
-    <a href="/legal.html">Legal</a>
-  </div>
 </footer>
 
 </body>
