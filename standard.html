@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>ActProofs Standard — Proof of Authorization of Automated Actions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+  <!-- Meta -->
+  <meta name="description" content="ActProofs is an open standard defining a cryptographic, portable, and independently verifiable proof of authorization for automated actions."/>
+  <meta name="robots" content="index,follow"/>
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#020617;
+      --muted:#475569;
+      --border:#e5e7eb;
+      --accent:#14532d;
+      --accent-soft:#f0fdf4;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.65;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(6px);
+      border-bottom:1px solid var(--border);
+      padding:16px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .brand{
+      font-weight:800;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-size:.85rem;
+    }
+
+    nav a{
+      margin-left:28px;
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:500;
+      font-size:.95rem;
+    }
+
+    nav a:hover{color:var(--text)}
+
+    main{
+      max-width:920px;
+      margin:0 auto;
+      padding:96px 24px 120px;
+    }
+
+    h1{
+      font-size:3rem;
+      line-height:1.1;
+      margin-bottom:12px;
+      font-weight:800;
+    }
+
+    .meta{
+      font-size:.9rem;
+      color:var(--muted);
+      margin-bottom:48px;
+    }
+
+    h2{
+      font-size:1.9rem;
+      margin-top:96px;
+      margin-bottom:20px;
+      font-weight:700;
+    }
+
+    h3{
+      font-size:1.2rem;
+      margin-top:36px;
+      margin-bottom:12px;
+      font-weight:700;
+    }
+
+    p{
+      max-width:860px;
+      color:var(--muted);
+      font-size:1.05rem;
+    }
+
+    ul{
+      padding-left:20px;
+      color:var(--muted);
+      max-width:820px;
+    }
+
+    ul li{
+      margin-bottom:10px;
+    }
+
+    blockquote{
+      border-left:4px solid var(--border);
+      padding-left:20px;
+      margin:28px 0;
+      color:#020617;
+      font-weight:600;
+    }
+
+    .model{
+      font-family:var(--mono);
+      background:#f8fafc;
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:16px 20px;
+      margin:20px 0;
+      font-size:.95rem;
+      color:#020617;
+    }
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:40px 24px;
+      font-size:.9rem;
+      color:var(--muted);
+      background:#ffffff;
+    }
+
+    footer a{
+      margin-right:20px;
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:500;
+    }
+
+    footer a:hover{color:var(--text)}
+
+    @media(max-width:800px){
+      h1{font-size:2.2rem}
+      main{padding-top:72px}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">ActProofs</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/standard" aria-current="page">Standard</a>
+    <a href="/regulations">Regulations</a>
+    <a href="/api">API</a>
+    <a href="/security">Security</a>
+  </nav>
+</header>
+
+<main>
+
+  <h1>ActProofs</h1>
+  <div class="meta">
+    Specification version: <strong>v0.1 (Draft)</strong>
+  </div>
+
+  <p>
+    ActProofs is an open standard for <strong>proof of authorization of automated actions</strong>.
+  </p>
+
+  <p>
+    It produces a <strong>cryptographic, portable, and independently verifiable receipt</strong>
+    proving that a specific automated action (notably involving AI) was explicitly authorized
+    by an <strong>identified actor or entity</strong>, in a <strong>defined context</strong>,
+    at a <strong>specific point in time</strong>.
+  </p>
+
+  <p>
+    <strong>ActProofs is best understood as a cryptographic receipt for authorizing automated actions.</strong>
+  </p>
+
+  <p>
+    ActProofs is designed for <strong>compliance</strong>, <strong>auditability</strong>,
+    <strong>accountability</strong>, and <strong>governance</strong> of automated and AI-driven systems.
+  </p>
+
+  <h2>Why ActProofs exists</h2>
+
+  <p>
+    Modern systems increasingly rely on automated workflows and AI agents capable of triggering
+    actions with real-world impact.
+  </p>
+
+  <p>
+    Regulators, auditors, insurers, and governance teams are asking a fundamental question:
+  </p>
+
+  <blockquote>
+    Who authorized this automated action, and when?
+  </blockquote>
+
+  <p>
+    Today, the market provides only:
+  </p>
+
+  <ul>
+    <li>internal logs (mutable, non-portable, non-opposable),</li>
+    <li>IAM / RBAC systems (access control, not proof),</li>
+    <li>execution traces (post-hoc, incomplete),</li>
+    <li>blockchain-based approaches (heavy, misaligned, unnecessary).</li>
+  </ul>
+
+  <p>
+    There is <strong>no standard, portable, opposable proof of authorization</strong>.
+  </p>
+
+  <p><strong>ActProofs fills this gap.</strong></p>
+
+  <h2>What ActProofs is</h2>
+
+  <ul>
+    <li>a <strong>standardized proof format</strong> for authorization decisions,</li>
+    <li>a <strong>cryptographic receipt</strong> that can be stored, shared, and audited,</li>
+    <li><strong>stateless by design</strong> (no server-side storage required),</li>
+    <li><strong>verification-first</strong> (no implicit trust in the issuer),</li>
+    <li>a <strong>compliance and governance building block</strong>.</li>
+  </ul>
+
+  <h3>Mental model</h3>
+
+  <div class="model">
+    Identified actor → Authorization → ActProof → Action (out of scope)
+  </div>
+
+  <h2>What ActProofs is not</h2>
+
+  <ul>
+    <li>does not execute actions,</li>
+    <li>does not trigger workflows,</li>
+    <li>does not enforce authorization,</li>
+    <li>does not manage identities,</li>
+    <li>does not authenticate users or systems,</li>
+    <li>does not replace IAM, RBAC, SSO, or PKI,</li>
+    <li>does not store logs or content,</li>
+    <li>does not rely on blockchain or distributed ledgers.</li>
+  </ul>
+
+  <p><strong>ActProofs records authorization decisions only.</strong></p>
+
+  <h2>Core principles</h2>
+
+  <h3>1. Identified initiator</h3>
+  <p>
+    The actor, organization, or system authorizing the action is
+    <strong>known and explicitly declared</strong>.
+  </p>
+
+  <h3>2. No identity management</h3>
+  <p>
+    ActProofs records <strong>declared identity context</strong> but does
+    <strong>not</strong> verify or manage identities.
+  </p>
+
+  <h3>3. No execution</h3>
+  <p>
+    Authorization proof is <strong>independent from action execution</strong>.
+  </p>
+
+  <h3>4. Stateless by design</h3>
+  <p>
+    No server-side storage is required to validate a proof.
+  </p>
+
+  <h3>5. Independent verification</h3>
+  <p>
+    Any third party can verify an ActProof <strong>without trusting the issuer</strong>.
+  </p>
+
+  <h3>6. Portable and durable</h3>
+  <p>
+    Proofs are <strong>files</strong>, not database records.
+  </p>
+
+  <h2>The ActProof (concept)</h2>
+
+  <p>
+    An <strong>ActProof</strong> is a self-contained file (for example,
+    <code>.actproof.json</code>) that cryptographically binds:
+  </p>
+
+  <ul>
+    <li>the <strong>authorized action</strong>,</li>
+    <li>the <strong>identified authorizing actor or entity</strong>,</li>
+    <li>the <strong>context</strong> (system, purpose, scope),</li>
+    <li>a <strong>timestamp</strong>,</li>
+    <li>a <strong>digital signature</strong>.</li>
+  </ul>
+
+  <p>
+    The proof can be archived, shared, audited, or provided to regulators,
+    insurers, or third parties.
+  </p>
+
+  <p>
+    Verification is possible <strong>at any time</strong>, without access to
+    internal systems.
+  </p>
+
+  <h2>Regulatory alignment</h2>
+
+  <p>
+    ActProofs is designed to support requirements related to:
+  </p>
+
+  <ul>
+    <li>AI governance and accountability,</li>
+    <li>oversight of automated decisions,</li>
+    <li>audit and risk management,</li>
+    <li>cybersecurity and operational resilience,</li>
+    <li>insurance and liability assessment.</li>
+  </ul>
+
+  <blockquote>
+    Demonstrate that an automated action was explicitly authorized
+    by a responsible entity.
+  </blockquote>
+
+  <p>
+    This is achieved <strong>without</strong> storing personal data,
+    executing actions, or centralizing logs.
+  </p>
+
+  <h2>Typical use cases</h2>
+
+  <ul>
+    <li>Authorization of AI-driven actions before execution</li>
+    <li>Approval of automated workflows in regulated environments</li>
+    <li>Human-in-the-loop authorization evidence</li>
+    <li>Audit trails for AI systems</li>
+    <li>Insurance and liability documentation</li>
+    <li>Governance of autonomous or semi-autonomous agents</li>
+    <li>Approval records for critical system actions</li>
+  </ul>
+
+  <h2>Positioning</h2>
+
+  <p>
+    ActProofs sits <strong>between</strong> identity and access management systems,
+    execution engines, and logging tools.
+  </p>
+
+  <p>
+    It acts as a <strong>neutral, portable proof layer</strong>.
+  </p>
+
+  <blockquote>
+    A receipt for authorizing an automated action.
+  </blockquote>
+
+  <h2>Project status</h2>
+
+  <ul>
+    <li>Specification: <strong>v0.1 (Draft)</strong></li>
+    <li>Reference implementation: <strong>In progress</strong></li>
+    <li>Target users: <strong>B2B, compliance, audit, AI governance teams</strong></li>
+  </ul>
+
+  <p>
+    ActProofs is developed as an <strong>open standard</strong>, designed
+    for interoperability and long-term verifiability.
+  </p>
+
+  <h2>Roadmap</h2>
+
+  <ul>
+    <li><strong>v0.1</strong> — Draft specification and conceptual validation</li>
+    <li><strong>v0.2</strong> — Stabilized format, reference implementation, paid issuance</li>
+    <li><strong>v1.0</strong> — Stable standard suitable for contractual and audit references</li>
+  </ul>
+
+  <h2>Philosophy</h2>
+
+  <p>
+    No hype.<br>
+    No blockchain.<br>
+    No execution logic.
+  </p>
+
+  <p><strong>Just provable authorization of automated actions.</strong></p>
+
+</main>
+
+<footer>
+  <a href="/">Home</a>
+  <a href="/standard">Standard</a>
+  <a href="/regulations">Regulations</a>
+  <a href="/api">API</a>
+  <a href="/security">Security</a>
+  <a href="/legal">Legal</a>
+</footer>
+
+</body>
+  </html>
