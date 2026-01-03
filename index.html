@@ -5,7 +5,7 @@
   <title>ActProofs — Provable Authorization for Automated Actions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <!-- Fonts -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -129,9 +129,7 @@
       font-weight:800;
     }
 
-    h1 span{
-      color:var(--accent);
-    }
+    h1 span{ color:var(--accent); }
 
     .hero p{
       font-size:1.15rem;
@@ -170,7 +168,7 @@
       background:#fff;
     }
 
-    /* SVG SCHEMA */
+    /* SCHEMA */
     .schema{
       background:var(--panel);
       border:1px solid var(--border);
@@ -198,8 +196,31 @@
     }
 
     section p{
-      max-width:720px;
+      max-width:760px;
       color:var(--muted);
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:48px;
+      margin-top:24px;
+    }
+
+    ul{
+      padding-left:20px;
+      color:var(--muted);
+    }
+
+    ul li{margin-bottom:10px}
+
+    .note{
+      margin-top:16px;
+      font-size:.95rem;
+      color:#065f46;
+      background:var(--accent-soft);
+      padding:14px 18px;
+      border-radius:12px;
     }
 
     /* FOOTER */
@@ -224,6 +245,7 @@
       nav.desktop{display:none}
       .burger{display:block}
       .hero{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
       h1{font-size:2.4rem}
     }
   </style>
@@ -293,30 +315,78 @@
     </div>
   </div>
 
+  <!-- PROBLEM -->
   <section>
     <h2>Automation created a responsibility gap</h2>
     <p>
-      AI systems already trigger actions with real-world impact.
-      Logs and permissions explain systems internally —
-      they do not provide <strong>independent proof</strong>.
+      Modern systems execute actions autonomously.
+      Logs and permissions explain behavior internally,
+      but they do not provide <strong>independent proof</strong> of authorization.
     </p>
   </section>
 
+  <!-- WHAT IT DOES / DOES NOT -->
   <section>
-    <h2>What ActProofs is</h2>
+    <h2>What ActProofs does — and does not do</h2>
+    <div class="split">
+      <div>
+        <h3>What ActProofs does</h3>
+        <ul>
+          <li>Issues cryptographic authorization proofs</li>
+          <li>Produces portable, verifiable receipts</li>
+          <li>Supports audit and accountability workflows</li>
+        </ul>
+      </div>
+      <div>
+        <h3>What ActProofs does not do</h3>
+        <ul>
+          <li>Does not execute or block actions</li>
+          <li>Does not manage identity or access control</li>
+          <li>Does not judge or validate decisions</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note">
+      ActProofs focuses intentionally on authorization proof.
+      Its scope is narrow by design.
+    </div>
+  </section>
+
+  <!-- VERIFICATION -->
+  <section>
+    <h2>Verification and audit</h2>
     <p>
-      ActProofs is a standard and API that produces a cryptographically verifiable
-      receipt proving that a specific automated action was explicitly authorized.
+      ActProofs produces proofs that can be verified independently,
+      without trusting a single platform.
+      Verification rules and formats are public and reproducible.
+    </p>
+    <p>
+      Auditors and third parties can validate authorization
+      without accessing the underlying data or systems.
     </p>
   </section>
 
+  <!-- REGULATORY -->
   <section>
-    <h2>Why now</h2>
+    <h2>Designed for regulation</h2>
     <p>
-      Automation is scaling faster than accountability.
-      Regulation is catching up.
-      <strong>Authorization must become provable.</strong>
+      ActProofs aligns with regulatory expectations around
+      accountability, traceability, and responsibility
+      for automated and AI-driven actions.
     </p>
+    <p>
+      It provides technical proof mechanisms,
+      without substituting legal or compliance processes.
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <h2>Make authorization provable</h2>
+    <div class="cta">
+      <a class="cta-primary" href="/request-access">Request access</a>
+      <a class="cta-secondary" href="/regulations">Regulatory context</a>
+    </div>
   </section>
 
 </main>
