@@ -5,196 +5,204 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta name="color-scheme" content="dark light"/>
-  <title>ActProofs — Evidence of Automated Actions</title>
+
+  <title>ActProofs — Evidence of Authorized Actions</title>
   <meta name="application-name" content="ActProofs"/>
-  <meta name="description" content="ActProofs provides verifiable evidence that an automated or AI-driven action was explicitly authorized — independently of execution, enforcement, or outcome."/>
-  <meta name="keywords" content="authorization proof,automated actions,AI governance,decision authorization,compliance evidence,ActProofs"/>
+  <meta name="description" content="ActProofs provides cryptographic proof that an action was explicitly authorized by an organization — for AI agents, automated workflows, and critical systems."/>
+  <meta name="keywords" content="action authorization proof,AI governance,automated actions,accountability,ActProofs,authorization evidence"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="theme-color" content="#0b1020"/>
+  <meta name="theme-color" content="#071b12"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
+
   <link rel="canonical" href="https://actproofs.io/"/>
 
   <!-- Icons -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
-  <link rel="icon" href="/assets/actproofs-logo.svg" type="image/svg+xml"/>
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
-  <link rel="manifest" href="/site.webmanifest"/>
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
 
   <!-- Social -->
-  <meta property="og:title" content="ActProofs — Evidence of Automated Actions"/>
-  <meta property="og:description" content="Cryptographic proof that an automated or AI-driven action was authorized — proof only, no execution, no control."/>
+  <meta property="og:title" content="ActProofs — Evidence of Authorized Actions"/>
+  <meta property="og:description" content="Prove that an action was explicitly authorized. Accountability for AI and automated systems."/>
   <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://actproofs.io/"/>
-  <meta property="og:image" content="https://actproofs.io/og.png"/>
-  <meta name="twitter:card" content="summary_large_image"/>
+  <meta property="og:image" content="/og.png"/>
 
-  <!-- Styles (UNCHANGED except accent color) -->
+  <!-- Styles (IDENTICAL except accent color) -->
   <style>
     :root{
-      --bg:#0b1020; --bg2:#0b1226; --panel:#0f172a; --line:#1e293b;
-      --text:#f8fafc; --muted:#94a3b8;
-      --accent:#3dff00; /* ActProofs green */
-      --ok:#3dff00; --warn:#f59e0b; --err:#ef4444;
-      --ring:0 0 0 1px #1e293b, 0 10px 40px rgba(61,255,0,.18);
+      --bg:#071b12;
+      --bg2:#092418;
+      --panel:#0b2f1e;
+      --line:#134e3a;
+      --text:#ecfdf5;
+      --muted:#9fe3c7;
+      --accent:#22c55e; /* ACTPROOFS GREEN */
+      --ok:#22c55e;
+      --warn:#f59e0b;
+      --err:#ef4444;
+      --ring:0 0 0 1px #134e3a, 0 10px 40px rgba(34,197,94,.18);
       --e:cubic-bezier(.22,.61,.36,1)
     }
-    /* REST OF CSS IS IDENTICAL TO TIMEPROOFS */
+    *{ box-sizing:border-box }
+    html{ background:var(--bg); scroll-behavior:smooth }
+    body{
+      margin:0;
+      color:var(--text);
+      font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(34,197,94,.06), transparent 60%),
+        var(--bg);
+    }
+    a{ color:var(--accent); text-decoration:none }
+    a:hover{ text-decoration:underline }
   </style>
 </head>
 
 <body>
-<a href="#main" class="skip">Skip to main content</a>
-
 <header class="tp-header" id="hdr">
   <a class="tp-brand" href="/">
-    <img src="/assets/actproofs-logo.png" alt="ActProofs logo" width="40" height="40"/>
+    <img src="/assets/logo.png" alt="ActProofs logo" width="40" height="40"/>
     <span>ActProofs</span>
   </a>
+
+  <!-- MENU STRICTEMENT IDENTIQUE -->
   <nav id="tp-nav" class="tp-nav">
-    <a href="/protocol.html">Authorization Spec</a>
+    <a href="/protocol.html">Protocol</a>
     <a href="/use-cases.html">Use Cases</a>
-    <a href="/docs.html">API Docs</a>
-    <a href="/regulations.html">Regulations</a>
+    <a href="/docs.html">Docs</a>
     <a href="/security.html">Security</a>
     <a href="/privacy.html">Privacy</a>
     <a href="/legal.html">Legal</a>
-    <a href="/about.html">About</a>
-    <a class="nav-cta" href="/verify.html">Create / Verify</a>
+    <a class="nav-cta" href="#pricing">Pricing</a>
   </nav>
-  <a class="cta-header" href="/verify.html">Create / Verify</a>
-  <button class="tp-burger" id="tp-burger"><span>☰</span></button>
+
+  <a class="cta-header" href="#pricing">Pricing</a>
 </header>
 
 <main id="main" class="wrap">
 
-<!-- HERO -->
-<section class="hero">
-  <div class="label">✔ Authorization · ✔ Governance · ✔ Automated Systems</div>
+  <!-- HERO (structure identique, texte changé) -->
+  <section class="hero">
+    <div class="label">✔ Explicit Authorization • 🤖 AI-ready • 🧭 Accountability</div>
 
-  <h1 class="title">Prove That an Automated Action Was Authorized.</h1>
+    <h1 class="title">Evidence of Authorized Actions</h1>
 
-  <p class="subtitle">
-    ActProofs provides verifiable evidence that an automated or AI-driven action
-    was explicitly authorized by an organization — independently of execution.
-  </p>
-
-  <p class="positioning">
-    One cryptographically signed authorization proof. Publicly verifiable. Proof only.
-  </p>
-
-  <p class="subnote">
-    No execution · No decision making · No access control · Evidence only
-  </p>
-
-  <div class="cta-wrap">
-    <a class="cta" href="/verify.html">Create / Verify an Authorization Proof</a>
-  </div>
-
-  <div class="micro">
-    <span class="chip">🧠 AI-ready</span>
-    <span class="chip">🔍 Independent audit</span>
-    <span class="chip">⚖ Governance & compliance</span>
-  </div>
-
-  <!-- DEMO (placeholder) -->
-  <div class="demo">
-    <strong>Authorization Check (Preview)</strong>
-    <p class="mini">
-      This demo will allow verification of authorization proofs.
-      API access coming shortly.
+    <p class="subtitle">
+      ActProofs provides verifiable proof that an action was explicitly authorized by an organization —
+      before or after it occurred.
     </p>
-  </div>
-</section>
 
-<!-- MISSION -->
-<section class="section bg-alt">
-  <h2>Mission</h2>
-  <div class="grid two">
-    <article class="card">
-      <h3>What ActProofs provides</h3>
-      <p>
-        ActProofs is an open protocol for producing cryptographic proof
-        that an automated action was explicitly authorized.
-      </p>
-    </article>
-    <article class="card">
-      <h3>Why it matters</h3>
-      <p>
-        In automated and AI-driven systems, responsibility must be explicit.
-        ActProofs makes authorization verifiable and auditable.
-      </p>
-    </article>
-  </div>
-</section>
+    <p class="positioning">
+      Built for AI agents, automated workflows, and high-risk systems.
+    </p>
 
-<!-- BUILT FOR -->
-<section class="section bg-alt">
-  <h2>Built for automated systems</h2>
-  <p style="text-align:center;color:#9fb3c9">
-    AI pipelines · Enterprise automation · Compliance & governance teams
-  </p>
-</section>
+    <p class="subnote">
+      No execution · No policy engine · No enforcement · Only authorization evidence
+    </p>
 
-<!-- HOW -->
-<section class="section bg-solid">
-  <h2>How Authorization Proofs Work</h2>
-  <p style="text-align:center;color:#9fb3c9">
-    Authorization → Signed proof → Independent verification
-  </p>
-  <div class="grid two">
-    <article class="card">
-      <h3>1) Define authorization</h3>
-      <p>Describe who authorized what, under which scope and constraints.</p>
-    </article>
-    <article class="card">
-      <h3>2) Sign the authorization</h3>
-      <p>A cryptographic proof is generated and timestamped.</p>
-    </article>
-    <article class="card">
-      <h3>3) Verify independently</h3>
-      <p>Anyone can verify that the authorization existed — without trusting execution.</p>
-    </article>
-  </div>
-</section>
+    <div class="cta-wrap">
+      <a class="cta" href="#pricing">View pricing</a>
+      <a class="cta secondary" href="/docs.html">Read the protocol</a>
+    </div>
 
-<!-- PROTOCOL VS API -->
-<section class="section bg-alt">
-  <h2>Protocol vs API</h2>
-  <div class="grid two">
-    <article class="card">
-      <h3>Authorization Spec</h3>
-      <p>Open, minimal rules defining what constitutes a valid authorization proof.</p>
-    </article>
-    <article class="card">
-      <h3>Reference API</h3>
-      <p>Edge-native API to issue and verify authorization proofs.</p>
-    </article>
-  </div>
-</section>
+    <div class="micro">
+      <span class="chip">📜 Signed authorization</span>
+      <span class="chip">🏛 Organizational responsibility</span>
+      <span class="chip">🔍 Public verification</span>
+    </div>
+  </section>
 
-<!-- WHY -->
-<section class="section bg-solid">
-  <h2>Why ActProofs</h2>
-  <div class="grid three">
-    <article class="card"><h3>Responsibility</h3><p>Clear accountability in automated systems.</p></article>
-    <article class="card"><h3>Auditability</h3><p>Independent verification without execution logs.</p></article>
-    <article class="card"><h3>Governance</h3><p>Proofs designed for regulation and compliance.</p></article>
-  </div>
-</section>
+  <!-- MISSION (structure inchangée) -->
+  <section class="section bg-alt" id="built">
+    <h2>Mission</h2>
+    <div class="grid two">
+      <article class="card">
+        <h3>What we provide</h3>
+        <p>
+          ActProofs is a neutral protocol to prove that an organization explicitly authorized an action.
+        </p>
+      </article>
+      <article class="card">
+        <h3>Why it matters</h3>
+        <p>
+          In automated systems, responsibility must be provable — not assumed.
+        </p>
+      </article>
+    </div>
+  </section>
 
-<!-- CTA -->
-<section class="section bg-alt">
-  <h2>Make authorization explicit</h2>
-  <div class="cta-wrap">
-    <a class="cta" href="/verify.html">Create an Authorization Proof</a>
-    <a class="cta secondary" href="/protocol.html">Read the Spec</a>
-  </div>
-</section>
+  <!-- HOW IT WORKS (structure inchangée, texte adapté) -->
+  <section class="section bg-solid" id="how">
+    <h2>How It Works</h2>
+    <p class="positioning" style="text-align:center">
+      Declare authorization → Sign proof → Verify independently
+    </p>
+
+    <div class="grid two">
+      <article class="card">
+        <h3>1) Declare authorization</h3>
+        <p>
+          An organization explicitly declares that a specific action is allowed.
+        </p>
+      </article>
+      <article class="card">
+        <h3>2) Generate ActProof</h3>
+        <p>
+          A signed authorization proof is generated and stored independently.
+        </p>
+      </article>
+      <article class="card">
+        <h3>3) Verify anytime</h3>
+        <p>
+          Anyone can verify that the authorization existed — without contacting the issuer.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PRICING (structure identique) -->
+  <section class="section bg-alt" id="pricing">
+    <h2>Pricing</h2>
+    <div class="grid three">
+      <article class="card">
+        <h3>Starter</h3>
+        <p>30 proofs / month</p>
+        <strong>€29.90</strong>
+      </article>
+      <article class="card">
+        <h3>Growth</h3>
+        <p>100 proofs / month</p>
+        <strong>€49.90</strong>
+      </article>
+      <article class="card">
+        <h3>Scale</h3>
+        <p>500 proofs / month</p>
+        <strong>€99.90</strong>
+      </article>
+    </div>
+  </section>
+
+  <!-- FINAL CTA (inchangé) -->
+  <section class="section bg-solid">
+    <h2>Make responsibility explicit</h2>
+    <div class="cta-wrap">
+      <a class="cta" href="/docs.html">Get started</a>
+    </div>
+  </section>
 
 </main>
 
+<!-- FOOTER STRICTEMENT IDENTIQUE -->
 <footer>
-  © 2025 ActProofs — Evidence of Automated Actions
+  © 2026 ActProofs — Evidence of Authorized Actions
+  <div class="links">
+    <a href="/">Home</a> •
+    <a href="/protocol.html">Protocol</a> •
+    <a href="/use-cases.html">Use Cases</a> •
+    <a href="/docs.html">Docs</a> •
+    <a href="/security.html">Security</a> •
+    <a href="/privacy.html">Privacy</a> •
+    <a href="/legal.html">Legal</a>
+  </div>
 </footer>
 
 </body>
