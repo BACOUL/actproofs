@@ -2,340 +2,331 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>ActProofs — Provable Authorization for AI Automation</title>
+  <title>ActProofs — Provable Authorization for Automated Actions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="ActProofs provides verifiable proof that automated actions were explicitly authorized. A missing authorization layer for AI automation and regulatory accountability." />
-
-  <!-- SEO / Social -->
-  <meta property="og:title" content="ActProofs — Provable Authorization for AI Automation" />
-  <meta property="og:description" content="Automation requires accountability. ActProofs issues verifiable authorization receipts for automated actions." />
-  <meta property="og:type" content="website" />
+  <meta name="description" content="ActProofs makes authorization provable for automated and AI-driven actions. A missing governance layer for regulated automation." />
 
   <style>
-    :root {
-      --bg: #ffffff;
-      --text-main: #0b1020;
-      --text-secondary: #4b5563;
-      --accent: #2cc55e;
-      --border: #e5e7eb;
+    :root{
+      --bg:#f8fafc;
+      --panel:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --border:#e2e8f0;
+
+      /* Accent ActProofs */
+      --accent:#15803d;
+      --accent-soft:#ecfdf5;
+      --accent-border:#bbf7d0;
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
-      line-height: 1.6;
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
     }
 
-    header {
-      border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    header{
+      background:var(--panel);
+      border-bottom:1px solid var(--border);
+      padding:20px 32px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
     }
 
-    header .brand {
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.02em;
+    header .brand{
+      font-weight:800;
+      letter-spacing:.03em;
     }
 
-    header nav a {
-      margin-left: 24px;
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-weight: 500;
+    header nav a{
+      margin-left:24px;
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:500;
     }
 
-    header nav a:hover { color: var(--text-main); }
+    header nav a:hover{color:var(--text)}
 
-    main {
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 72px 24px;
+    main{
+      max-width:1100px;
+      margin:0 auto;
+      padding:96px 24px;
     }
 
-    section { margin-bottom: 96px; }
-
-    .status {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
+    /* HERO */
+    .hero{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:64px;
+      align-items:center;
+      margin-bottom:140px;
     }
 
-    h1 {
-      font-size: 2.4rem;
-      line-height: 1.2;
-      margin-bottom: 24px;
+    .status{
+      display:inline-block;
+      font-size:.75rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--accent);
+      background:var(--accent-soft);
+      border:1px solid var(--accent-border);
+      padding:6px 10px;
+      border-radius:999px;
+      margin-bottom:20px;
     }
 
-    h2 {
-      font-size: 1.6rem;
-      margin-bottom: 16px;
+    h1{
+      font-size:3rem;
+      line-height:1.1;
+      margin:0 0 20px;
     }
 
-    p {
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      max-width: 720px;
+    h1 span{
+      border-bottom:4px solid var(--accent);
+      padding-bottom:4px;
     }
 
-    ul, ol {
-      padding-left: 20px;
-      color: var(--text-secondary);
+    .hero p{
+      font-size:1.15rem;
+      color:var(--muted);
+      max-width:520px;
     }
 
-    ul li, ol li { margin-bottom: 8px; }
-
-    .hero p { font-size: 1.05rem; }
-
-    .cta { margin-top: 32px; }
-
-    .cta a {
-      display: inline-block;
-      margin-right: 16px;
-      padding: 12px 20px;
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 6px;
+    .cta{
+      margin-top:32px;
     }
 
-    .cta-primary {
-      background: var(--text-main);
-      color: #ffffff;
+    .cta a{
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      margin-right:16px;
     }
 
-    .cta-secondary {
-      border: 1px solid var(--text-main);
-      color: var(--text-main);
+    .cta-primary{
+      background:var(--accent);
+      color:#ffffff;
+      box-shadow:0 6px 20px rgba(21,128,61,.25);
     }
 
-    .meta-link {
-      margin-top: 12px;
-      font-size: 0.95rem;
+    .cta-secondary{
+      border:1px solid var(--accent);
+      color:var(--accent);
+      background:#ffffff;
     }
 
-    .meta-link a {
-      color: var(--text-main);
-      text-decoration: underline;
+    /* SCHEMA */
+    .schema{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-left:6px solid var(--accent);
+      border-radius:16px;
+      padding:32px;
     }
 
-    pre {
-      background: #f9fafb;
-      border: 1px solid var(--border);
-      padding: 16px;
-      overflow-x: auto;
-      color: var(--text-main);
-      font-size: 0.9rem;
+    .schema h3{
+      margin-top:0;
+      font-size:1.1rem;
     }
 
-    .schema {
-      margin-top: 12px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: 0.95rem;
-      color: var(--text-main);
+    .flow{
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+      font-size:.95rem;
+      background:var(--accent-soft);
+      border:1px solid var(--accent-border);
+      border-radius:12px;
+      padding:16px;
+      margin-top:16px;
+      color:#065f46;
     }
 
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 32px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+    /* SECTIONS */
+    section{
+      margin-bottom:120px;
     }
 
-    footer nav a {
-      margin-right: 16px;
-      text-decoration: none;
-      color: var(--text-secondary);
+    section h2{
+      font-size:2rem;
+      margin-bottom:16px;
+      position:relative;
     }
 
-    footer nav a:hover { color: var(--text-main); }
+    section h2::before{
+      content:"";
+      position:absolute;
+      left:-16px;
+      top:6px;
+      width:6px;
+      height:70%;
+      background:var(--accent);
+      border-radius:4px;
+    }
 
-    .trust-bullets {
-      margin-top: 12px;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+    section p{
+      max-width:720px;
+      color:var(--muted);
+    }
+
+    ul{
+      padding-left:20px;
+      color:var(--muted);
+    }
+
+    ul li{margin-bottom:8px}
+
+    /* FOOTER */
+    footer{
+      background:var(--panel);
+      border-top:1px solid var(--border);
+      padding:40px 32px;
+      font-size:.9rem;
+      color:var(--muted);
+    }
+
+    footer nav a{
+      margin-right:16px;
+      text-decoration:none;
+      color:var(--muted);
+    }
+
+    footer nav a:hover{color:var(--text)}
+
+    .trust{
+      margin-top:14px;
+      font-size:.85rem;
+      color:#065f46;
+    }
+
+    @media(max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        gap:40px;
+      }
+      h1{font-size:2.4rem}
+      section h2::before{display:none}
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="brand">ActProofs</div>
-    <nav>
-      <a href="/standard">Standard</a>
-      <a href="/regulations">Regulations</a>
-      <a href="/api">API</a>
-      <a href="/security">Security</a>
-    </nav>
-  </header>
+<header>
+  <div class="brand">ActProofs</div>
+  <nav>
+    <a href="/standard">Standard</a>
+    <a href="/regulations">Regulations</a>
+    <a href="/api">API</a>
+    <a href="/security">Security</a>
+  </nav>
+</header>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <div class="status">Status: Emerging authorization standard · Early access</div>
+<main>
 
-      <h1>AI automation requires provable authorization.</h1>
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="status">Emerging authorization standard · Early access</div>
+      <h1>
+        Automated systems act.<br/>
+        <span>But who authorized them?</span>
+      </h1>
       <p>
-        Automated systems act.<br />
-        Regulations require accountability.<br />
-        <strong>ActProofs provides verifiable proof that an automated action was explicitly authorized.</strong>
+        ActProofs makes authorization <strong>provable</strong> for automated and AI-driven actions —
+        before the action, not after.
       </p>
-
       <div class="cta">
-        <a href="/request-access" class="cta-primary">Request access</a>
-        <a href="/standard" class="cta-secondary">Read the standard</a>
+        <a class="cta-primary" href="/request-access">Request access</a>
+        <a class="cta-secondary" href="/standard">Read the standard</a>
       </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section>
-      <h2>Automation created a responsibility gap</h2>
-      <p>
-        AI systems and automated workflows already delete data, send messages,
-        trigger decisions, and impact users and systems.
-      </p>
-      <p><strong>Who authorized this action?</strong></p>
-      <p>
-        Logs show what happened. Permissions show what was possible. Policies
-        describe intent.
-      </p>
-      <p>
-        <strong>None provide proof that an action was explicitly authorized before it occurred.</strong>
-      </p>
-    </section>
-
-    <!-- REGULATORY REQUIREMENTS -->
-    <section>
-      <h2>What regulations actually require</h2>
-      <p>
-        Regulation does not mandate tools. It mandates the ability to demonstrate
-        control, prove authorization, and assign responsibility.
-      </p>
-      <ul>
-        <li>Prove authorization</li>
-        <li>Audit automated actions</li>
-        <li>Demonstrate accountability</li>
-        <li>Assign responsibility after the fact</li>
-      </ul>
-      <p>
-        Without proof of authorization, responsibility is assumed — not demonstrated.
-      </p>
-      <div class="meta-link">
-        <a href="/regulations">See how ActProofs maps to regulatory requirements →</a>
-      </div>
-    </section>
-
-    <!-- MISSING LAYER -->
-    <section>
-      <h2>The missing technical layer</h2>
-      <pre>
-IAM / Permissions → what could be done
-Logs / Monitoring → what was done
-Policies / Procedures → what was intended
-
-❌ None produce a portable, verifiable authorization proof
-      </pre>
-      <p>ActProofs fills this gap.</p>
-    </section>
-
-    <!-- WHAT IT IS -->
-    <section>
-      <h2>What ActProofs is</h2>
-      <p>
-        ActProofs is a standard and API that produces a cryptographic, portable,
-        independently verifiable receipt proving that a specific automated action
-        was explicitly authorized by an identified actor, in a defined context,
-        at a given point in time.
-      </p>
-
-      <div class="schema">
-        Actor → Authorization → ActProof → Automated Action
-      </div>
-
-      <p>
-        ActProofs does not manage identity, execute actions, or decide whether an
-        action should occur.
-      </p>
-      <p>
-        <strong>It only records authorization.</strong>
-      </p>
-      <p class="trust-bullets">
-        ActProofs provides technical proof mechanisms only.  
-        It does not constitute legal advice or certification of compliance.
-      </p>
-    </section>
-
-    <!-- HOW IT FITS -->
-    <section>
-      <h2>How it fits into automation</h2>
-      <ol>
-        <li>An automated system requests an authorization proof</li>
-        <li>ActProofs issues a verifiable receipt</li>
-        <li>The system proceeds and keeps the proof</li>
-      </ol>
-      <p>ActProofs does not slow automation. It makes automation accountable.</p>
-    </section>
-
-    <!-- WHO -->
-    <section>
-      <h2>Who ActProofs is for</h2>
-      <ul>
-        <li>Organizations deploying AI-driven automation</li>
-        <li>Compliance, governance, and risk teams</li>
-        <li>Auditors and insurers</li>
-        <li>Developers building responsible systems</li>
-      </ul>
-    </section>
-
-    <!-- WHY NOW -->
-    <section>
-      <h2>Why now</h2>
-      <p>
-        Automation is accelerating. Responsibility is shifting. Regulation is
-        catching up.
-      </p>
-      <p>
-        <strong>Automation without provable authorization is becoming unacceptable.</strong>
-      </p>
-      <p>
-        ActProofs is designed to integrate with future regulatory and audit frameworks.
-      </p>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section>
-      <h2>Make authorization provable</h2>
-      <div class="cta">
-        <a href="/request-access" class="cta-primary">Request access</a>
-        <a href="/standard" class="cta-secondary">Read the standard</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <nav>
-      <a href="/">Product</a>
-      <a href="/standard">Standard</a>
-      <a href="/regulations">Regulations</a>
-      <a href="/api">API</a>
-      <a href="/security">Security</a>
-      <a href="/legal">Legal</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="trust-bullets">
-      Stateless by design · No content storage · Independently verifiable proofs
     </div>
-    <p>© 2026 ActProofs.</p>
-  </footer>
+
+    <div class="schema">
+      <h3>The missing authorization layer</h3>
+      <div class="flow">
+IAM / Permissions  → what could be done<br/>
+Logs / Monitoring → what was done<br/>
+Policies          → what was intended<br/><br/>
+<strong>ActProofs → cryptographic proof of authorization</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM -->
+  <section>
+    <h2>Automation created a responsibility gap</h2>
+    <p>
+      AI systems already delete data, send messages, trigger workflows,
+      and affect users and businesses.
+    </p>
+    <p>
+      Logs and permissions explain systems internally.
+      They do not provide <strong>independent proof</strong>.
+    </p>
+    <p><strong>Without proof of authorization, responsibility is assumed.</strong></p>
+  </section>
+
+  <!-- WHAT IT IS -->
+  <section>
+    <h2>What ActProofs is</h2>
+    <p>
+      ActProofs is a standard and API that produces a portable, cryptographically
+      verifiable receipt proving that a specific automated action was explicitly
+      authorized by a known actor, in a defined context, at a specific time.
+    </p>
+    <div class="flow">
+Actor → Authorization → ActProof → Automated Action
+    </div>
+    <p>
+      ActProofs does not execute actions, manage identity, or judge decisions.
+      <strong>It only records authorization.</strong>
+    </p>
+  </section>
+
+  <!-- WHY NOW -->
+  <section>
+    <h2>Why now</h2>
+    <p>
+      Automation is scaling faster than accountability.
+      Regulation is catching up.
+    </p>
+    <p>
+      <strong>Automation without provable authorization is becoming unacceptable.</strong>
+    </p>
+  </section>
+
+  <!-- CTA -->
+  <section>
+    <h2>Make authorization provable</h2>
+    <div class="cta">
+      <a class="cta-primary" href="/request-access">Request access</a>
+      <a class="cta-secondary" href="/regulations">Regulatory context</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <nav>
+    <a href="/">Product</a>
+    <a href="/standard">Standard</a>
+    <a href="/regulations">Regulations</a>
+    <a href="/api">API</a>
+    <a href="/security">Security</a>
+    <a href="/legal">Legal</a>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/contact">Contact</a>
+  </nav>
+  <div class="trust">
+    Stateless · No content storage · Independently verifiable proofs
+  </div>
+</footer>
 </body>
 </html>
