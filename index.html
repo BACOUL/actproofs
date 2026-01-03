@@ -5,6 +5,10 @@
   <title>ActProofs — Provable Authorization for Automated Actions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+  <!-- Meta -->
+  <meta name="description" content="ActProofs defines a neutral standard and API to produce cryptographic proof that an automated or AI-driven action was explicitly authorized."/>
+  <meta name="robots" content="index,follow"/>
+
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +17,6 @@
   <style>
     :root{
       --bg:#ffffff;
-      --panel:#ffffff;
       --text:#020617;
       --muted:#475569;
       --border:#e5e7eb;
@@ -28,7 +31,7 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
       background:var(--bg);
       color:var(--text);
-      line-height:1.6;
+      line-height:1.65;
       -webkit-font-smoothing:antialiased;
     }
 
@@ -40,7 +43,7 @@
       background:rgba(255,255,255,.96);
       backdrop-filter:blur(6px);
       border-bottom:1px solid var(--border);
-      padding:16px 24px;
+      padding:18px 28px;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -48,13 +51,13 @@
 
     .brand{
       font-weight:800;
-      letter-spacing:.08em;
+      letter-spacing:.14em;
       text-transform:uppercase;
-      font-size:.9rem;
+      font-size:.85rem;
     }
 
     nav.desktop a{
-      margin-left:28px;
+      margin-left:32px;
       text-decoration:none;
       color:var(--muted);
       font-weight:500;
@@ -67,7 +70,6 @@
       display:none;
       font-size:26px;
       cursor:pointer;
-      user-select:none;
     }
 
     /* MOBILE MENU */
@@ -78,7 +80,7 @@
       z-index:999;
       display:none;
       flex-direction:column;
-      padding:32px;
+      padding:36px;
     }
 
     .mobile-menu.open{display:flex}
@@ -99,98 +101,104 @@
 
     /* MAIN */
     main{
-      max-width:960px;
+      max-width:980px;
       margin:0 auto;
-      padding:120px 24px 96px;
+      padding:140px 24px 96px;
     }
 
     /* HERO */
     .hero{
-      margin-bottom:120px;
+      margin-bottom:140px;
     }
 
     .status{
       display:inline-block;
       font-size:.72rem;
-      letter-spacing:.12em;
+      letter-spacing:.16em;
       text-transform:uppercase;
       color:var(--accent);
       background:var(--accent-soft);
-      padding:6px 10px;
+      padding:6px 12px;
       border-radius:999px;
-      margin-bottom:28px;
+      margin-bottom:32px;
       font-weight:600;
     }
 
     h1{
-      font-size:3.4rem;
-      line-height:1.05;
-      margin:0 0 28px;
+      font-size:3.6rem;
+      line-height:1.03;
+      margin:0 0 32px;
       font-weight:800;
-      max-width:900px;
+      max-width:920px;
     }
 
     .hero p{
-      font-size:1.2rem;
+      font-size:1.25rem;
       color:var(--muted);
-      max-width:720px;
+      max-width:760px;
     }
 
     .cta{
-      margin-top:40px;
+      margin-top:48px;
     }
 
     .cta a{
       display:inline-block;
-      padding:14px 22px;
-      border-radius:10px;
+      padding:15px 26px;
+      border-radius:12px;
       text-decoration:none;
       font-weight:700;
-      margin-right:16px;
+      margin-right:18px;
       border:1px solid var(--border);
     }
 
     .cta-primary{
       background:var(--text);
-      color:#fff;
+      color:#ffffff;
       border-color:var(--text);
     }
 
     .cta-secondary{
-      background:#fff;
+      background:#ffffff;
       color:var(--text);
     }
 
     /* SECTIONS */
     section{
-      margin-bottom:120px;
+      margin-bottom:140px;
     }
 
     section h2{
-      font-size:2.1rem;
+      font-size:2.2rem;
       font-weight:700;
-      margin-bottom:20px;
+      margin-bottom:24px;
     }
 
     section p{
-      max-width:760px;
+      max-width:820px;
       color:var(--muted);
-      font-size:1.05rem;
+      font-size:1.08rem;
+    }
+
+    .axiom{
+      font-size:1.35rem;
+      font-weight:700;
+      line-height:1.4;
+      margin:56px 0;
     }
 
     .rule{
       border-left:4px solid var(--border);
-      padding-left:20px;
-      margin:24px 0;
+      padding-left:24px;
+      margin:28px 0;
       font-weight:600;
-      color:#020617;
     }
 
     .split{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:64px;
-      margin-top:32px;
+      gap:72px;
+      margin-top:40px;
     }
 
     ul{
@@ -198,26 +206,19 @@
       color:var(--muted);
     }
 
-    ul li{margin-bottom:12px}
-
-    .axiom{
-      font-size:1.25rem;
-      font-weight:700;
-      color:#020617;
-      margin:40px 0;
-    }
+    ul li{margin-bottom:14px}
 
     /* FOOTER */
     footer{
       border-top:1px solid var(--border);
-      background:#fff;
-      padding:40px 24px;
+      background:#ffffff;
+      padding:48px 24px;
       font-size:.9rem;
       color:var(--muted);
     }
 
     footer a{
-      margin-right:20px;
+      margin-right:24px;
       text-decoration:none;
       color:var(--muted);
       font-weight:500;
@@ -228,8 +229,9 @@
     @media(max-width:900px){
       nav.desktop{display:none}
       .burger{display:block}
-      h1{font-size:2.4rem}
+      h1{font-size:2.5rem}
       .split{grid-template-columns:1fr}
+      main{padding-top:120px}
     }
   </style>
 </head>
@@ -266,9 +268,9 @@
       Authorization must be provable.
     </h1>
     <p>
-      ActProofs defines a neutral standard and API for producing
+      ActProofs defines a neutral standard and API to produce
       cryptographic proof that an automated or AI-driven action
-      was explicitly authorized — in a given context, at a given time.
+      was explicitly authorized, in a given context, at a given time.
     </p>
     <div class="cta">
       <a class="cta-primary" href="/request-access">Request access</a>
@@ -279,8 +281,8 @@
   <!-- AXIOM -->
   <section>
     <div class="axiom">
-      A log is not proof.<br>
-      A policy is not evidence.<br>
+      Logs are not proof.<br>
+      Policies are not evidence.<br>
       Authorization must stand on its own.
     </div>
   </section>
@@ -289,16 +291,16 @@
   <section>
     <h2>The responsibility gap</h2>
     <p>
-      Automation executes actions with real-world impact.
-      Existing systems record behavior internally, but do not
-      produce independent, portable, verifiable proof of authorization.
+      Automation already triggers actions with real-world impact.
+      Existing systems record events internally, but do not provide
+      independent, portable, verifiable proof of authorization.
     </p>
     <div class="rule">
-      When an action is disputed, internal logs are insufficient.
+      When an action is disputed, internal systems are insufficient.
     </div>
   </section>
 
-  <!-- WHAT / WHAT NOT -->
+  <!-- SCOPE -->
   <section>
     <h2>Scope</h2>
     <div class="split">
@@ -307,7 +309,7 @@
         <ul>
           <li>Produces cryptographic authorization receipts</li>
           <li>Links an action to an explicit authorization</li>
-          <li>Enables independent verification and audit</li>
+          <li>Supports audit and accountability workflows</li>
         </ul>
       </div>
       <div>
@@ -315,7 +317,7 @@
         <ul>
           <li>Does not execute, block, or validate actions</li>
           <li>Does not manage identity or access control</li>
-          <li>Does not judge legality or intent</li>
+          <li>Does not judge legality, intent, or outcomes</li>
         </ul>
       </div>
     </div>
@@ -338,9 +340,10 @@
   <section>
     <h2>Designed for governance and regulation</h2>
     <p>
-      ActProofs addresses technical requirements emerging from
-      AI governance, auditability, and accountability frameworks,
-      without replacing legal or organizational responsibility.
+      ActProofs addresses emerging requirements around
+      accountability, traceability, and responsibility for
+      automated and AI-driven actions, without replacing
+      legal or organizational responsibility.
     </p>
   </section>
 
@@ -352,7 +355,7 @@
   <a href="/api">API</a>
   <a href="/security">Security</a>
   <a href="/legal">Legal</a>
-  <div style="margin-top:14px">
+  <div style="margin-top:16px">
     Stateless · Portable proof · Independently verifiable
   </div>
 </footer>
