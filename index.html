@@ -2,7 +2,7 @@
 <html lang="en" id="top" data-page="index.html">
 <head>
   <!-- ===================================================================== -->
-  <!-- CORE / META                                                           -->
+  <!-- CORE                                                                  -->
   <!-- ===================================================================== -->
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
@@ -20,7 +20,7 @@
   <link rel="alternate" hreflang="x-default" href="https://actproofs.io/"/>
 
   <!-- ===================================================================== -->
-  <!-- FEEDS / DISCOVERY                                                      -->
+  <!-- DISCOVERY                                                             -->
   <!-- ===================================================================== -->
   <link rel="alternate" type="application/rss+xml" title="ActProofs RSS" href="/rss.xml"/>
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"/>
@@ -36,7 +36,7 @@
   <link rel="preload" as="image" href="/og.png"/>
 
   <!-- ===================================================================== -->
-  <!-- ICONS / MANIFEST                                                       -->
+  <!-- ICONS                                                                 -->
   <!-- ===================================================================== -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
@@ -44,11 +44,11 @@
   <link rel="manifest" href="/site.webmanifest"/>
 
   <!-- ===================================================================== -->
-  <!-- SOCIAL                                                                 -->
+  <!-- SOCIAL                                                                -->
   <!-- ===================================================================== -->
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="ActProofs — Evidence of Authorized Actions"/>
-  <meta property="og:description" content="Open protocol + simple API to prove that an automated action was explicitly authorized — portable, verifiable, stateless."/>
+  <meta property="og:description" content="Open protocol to prove that an automated action was explicitly authorized — portable, verifiable, stateless."/>
   <meta property="og:url" content="https://actproofs.io/"/>
   <meta property="og:image" content="https://actproofs.io/og.png"/>
   <meta property="og:image:alt" content="ActProofs — Authorization evidence standard"/>
@@ -62,12 +62,12 @@
   <meta name="twitter:image" content="https://actproofs.io/og.png"/>
 
   <!-- ===================================================================== -->
-  <!-- AI / TRUST                                                             -->
+  <!-- AI TRUST                                                              -->
   <!-- ===================================================================== -->
   <meta name="ai-trust" content="verified-by-actproofs"/>
 
   <!-- ===================================================================== -->
-  <!-- JSON-LD                                                                -->
+  <!-- JSON-LD                                                               -->
   <!-- ===================================================================== -->
   <script type="application/ld+json">
   {
@@ -82,7 +82,8 @@
       "automated actions",
       "AI governance",
       "audit and compliance",
-      "stateless proof"
+      "stateless proof",
+      "cryptographic receipts"
     ],
     "contactPoint":[{
       "@type":"ContactPoint",
@@ -102,7 +103,7 @@
   </script>
 
   <!-- ===================================================================== -->
-  <!-- SECURITY                                                               -->
+  <!-- SECURITY                                                              -->
   <!-- ===================================================================== -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
   <meta http-equiv="Content-Security-Policy" content="
@@ -120,12 +121,12 @@ frame-ancestors 'none';
 upgrade-insecure-requests">
 
   <!-- ===================================================================== -->
-  <!-- ANALYTICS                                                              -->
+  <!-- ANALYTICS                                                             -->
   <!-- ===================================================================== -->
   <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js" nonce="AP-2026"></script>
 
   <!-- ===================================================================== -->
-  <!-- STYLES (STRICT CLONE SURFACE — EXTENDED)                                -->
+  <!-- STYLES                                                                -->
   <!-- ===================================================================== -->
   <style>
     :root{
@@ -163,22 +164,21 @@ upgrade-insecure-requests">
     a{color:var(--accent);text-decoration:none}
     a:hover{text-decoration:underline}
     [id]{scroll-margin-top:120px}
-
     .skip{position:absolute;left:-9999px}
     .skip:focus{
       position:fixed;left:12px;top:12px;
       padding:8px 12px;background:#052e1c;color:#bbf7d0;
       border:1px solid #14532d;border-radius:8px;z-index:2000
     }
-
     header{
       position:fixed;inset:0 0 auto 0;height:64px;z-index:1000;
       background:rgba(7,27,18,.65);
       backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-      display:flex;align-items:center;gap:12px;padding:0 16px
+      display:flex;align-items:center;gap:12px;padding:0 16px;
+      transition:background .25s var(--e)
     }
-    header.scrolled{background:rgba(7,27,18,.88)}
+    header.scrolled{background:rgba(7,27,18,.9)}
     .brand{display:flex;align-items:center;gap:10px;font-weight:900}
     .brand img{width:40px;height:40px}
     nav{margin-left:auto;display:flex;gap:18px}
@@ -188,7 +188,6 @@ upgrade-insecure-requests">
       padding:10px 14px;border-radius:10px;
       background:var(--accent);color:#052e1c;font-weight:800
     }
-
     main{max-width:1200px;margin:0 auto;padding:0 16px}
     .hero{
       min-height:calc(100svh - 64px);
@@ -202,7 +201,7 @@ upgrade-insecure-requests">
       border-radius:999px;font-size:.85rem
     }
     h1{
-      font-size:clamp(2.4rem,6.2vw,3.6rem);
+      font-size:clamp(2.6rem,6.4vw,3.8rem);
       font-weight:900;margin:18px 0 14px;
       background:linear-gradient(90deg,#dcfce7,#86efac 35%,#dcfce7);
       -webkit-background-clip:text;color:transparent
@@ -218,8 +217,7 @@ upgrade-insecure-requests">
       background:#052e1c;color:var(--text);
       border:1px solid var(--line)
     }
-
-    section{padding:56px 0}
+    section{padding:64px 0}
     section.alt{
       background:linear-gradient(180deg,var(--bg),var(--bg2));
       border-top:1px solid var(--line);
@@ -230,9 +228,8 @@ upgrade-insecure-requests">
       border-top:1px solid var(--line);
       border-bottom:1px solid var(--line)
     }
-    h2{text-align:center;color:#bbf7d0;margin-bottom:24px}
+    h2{text-align:center;color:#bbf7d0;margin-bottom:28px}
     p.center{text-align:center;color:var(--muted);max-width:920px;margin:0 auto}
-
     .grid{display:grid;gap:16px}
     @media(min-width:900px){
       .grid.two{grid-template-columns:1fr 1fr}
@@ -243,10 +240,9 @@ upgrade-insecure-requests">
       background:#052e1c;
       border:1px solid var(--line);
       border-radius:16px;
-      padding:20px
+      padding:22px
     }
     .card h3{margin-top:0;color:#bbf7d0}
-
     pre{
       background:#04140c;
       border:1px solid var(--line);
@@ -255,14 +251,16 @@ upgrade-insecure-requests">
       overflow:auto;
       color:#dcfce7
     }
-
+    .divider{height:1px;background:var(--line);margin:24px 0}
     footer{
       border-top:1px solid var(--line);
-      margin-top:64px;
-      padding:32px 16px;
+      margin-top:80px;
+      padding:40px 16px;
       text-align:center;
       color:var(--muted)
     }
+    footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+    footer .links a{font-weight:700}
   </style>
 </head>
 
@@ -284,9 +282,8 @@ upgrade-insecure-requests">
 </header>
 
 <main id="main">
-  <!-- =================================================================== -->
-  <!-- HERO                                                                 -->
-  <!-- =================================================================== -->
+
+  <!-- HERO -->
   <section class="hero">
     <span class="label">Open · Stateless · Authorization Evidence</span>
     <h1>Evidence of Authorized Actions</h1>
@@ -303,16 +300,15 @@ upgrade-insecure-requests">
     </div>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- WHY                                                                  -->
-  <!-- =================================================================== -->
-  <section class="alt">
+  <!-- WHY -->
+  <section class="alt" id="why">
     <h2>Why ActProofs exists</h2>
     <p class="center">
-      Automated systems act faster than ever. Responsibility, however, still lies with humans and organizations.
-      ActProofs exists to make authorization explicit, provable, and auditable.
+      Automated systems execute actions faster than ever. Responsibility, however,
+      remains with humans and organizations. ActProofs exists to make authorization
+      explicit, provable, and auditable.
     </p>
-    <div class="grid three" style="margin-top:32px">
+    <div class="grid three" style="margin-top:36px">
       <div class="card">
         <h3>Automation executes</h3>
         <p>AI agents and workflows perform actions continuously and at scale.</p>
@@ -328,10 +324,8 @@ upgrade-insecure-requests">
     </div>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- WHAT IS                                                              -->
-  <!-- =================================================================== -->
-  <section>
+  <!-- WHAT -->
+  <section id="what">
     <h2>What is ActProofs?</h2>
     <div class="grid two">
       <div class="card">
@@ -341,21 +335,25 @@ upgrade-insecure-requests">
           proving that a specific automated action was explicitly authorized
           by an identified actor, in a defined context, at a given time.
         </p>
+        <p>
+          The receipt is file-based, durable, and designed to be verified
+          independently, without trusting a platform.
+        </p>
       </div>
       <div class="card">
         <p>
-          It does not execute actions. It does not enforce policies.
+          ActProofs does not execute actions. It does not enforce policies.
           It does not manage identities or access control.
-          It provides evidence — nothing more.
+        </p>
+        <p>
+          It provides evidence of authorization — nothing more, nothing less.
         </p>
       </div>
     </div>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- HOW IT WORKS                                                         -->
-  <!-- =================================================================== -->
-  <section class="alt">
+  <!-- HOW -->
+  <section class="alt" id="how">
     <h2>How it works</h2>
     <pre>
 Identified Actor
@@ -368,124 +366,186 @@ Automated Action
 (out of scope)
     </pre>
     <p class="center">
-      ActProofs records intent and approval before execution.
+      Authorization is captured before execution.
       Verification can be performed independently, online or offline.
     </p>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- USE CASES                                                            -->
-  <!-- =================================================================== -->
-  <section>
+  <!-- USE CASES -->
+  <section id="use-cases">
     <h2>Legitimate use cases</h2>
     <div class="grid three">
       <div class="card">
         <h3>AI & autonomous agents</h3>
-        <p>Prove that a human or organization explicitly authorized an AI-driven action.</p>
+        <p>
+          Prove that a human or organization explicitly authorized an AI-driven action,
+          such as publishing content, modifying data, or contacting users.
+        </p>
       </div>
       <div class="card">
         <h3>Automated workflows</h3>
-        <p>Maintain a clean separation between approval and execution.</p>
+        <p>
+          Maintain a clean separation between approval and execution in CI/CD,
+          data pipelines, or operational automation.
+        </p>
       </div>
       <div class="card">
         <h3>Audit & compliance</h3>
-        <p>Produce clear authorization evidence for audits, investigations, and insurance.</p>
+        <p>
+          Produce clear, portable authorization evidence for audits,
+          investigations, and insurance claims.
+        </p>
       </div>
     </div>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- WHAT IT IS NOT                                                       -->
-  <!-- =================================================================== -->
-  <section class="solid">
-    <h2>What ActProofs is not</h2>
+  <!-- VERIFY PREVIEW -->
+  <section class="alt" id="verify-preview">
+    <h2>Create & verify</h2>
+    <p class="center">
+      ActProofs can be created locally and verified publicly.
+      No account is required to verify an authorization receipt.
+    </p>
+    <div class="grid two" style="margin-top:32px">
+      <div class="card">
+        <h3>Create</h3>
+        <p>
+          Declare the intended action and authorization context locally.
+          Receive a signed ActProof that can be archived or shared.
+        </p>
+        <pre>
+POST /v1/authorize
+{
+  "actor": "org:example",
+  "action": "publish-content",
+  "context": "blog.example.com",
+  "timestamp": "2026-01-03T20:45:00Z"
+}
+        </pre>
+      </div>
+      <div class="card">
+        <h3>Verify</h3>
+        <p>
+          Verify the cryptographic integrity and declared context of an ActProof
+          independently, online or offline.
+        </p>
+        <pre>
+GET /verify?proof=actproof.json
+→ valid
+        </pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCS PREVIEW -->
+  <section id="docs-preview">
+    <h2>Documentation</h2>
+    <p class="center">
+      The ActProofs specification defines the proof format, signing model,
+      and verification rules.
+    </p>
+    <div class="grid three" style="margin-top:32px">
+      <div class="card">
+        <h3>Proof format</h3>
+        <p>File-based JSON structure describing authorization, context, and signature.</p>
+      </div>
+      <div class="card">
+        <h3>Signing model</h3>
+        <p>Deterministic, auditable signing without implicit trust.</p>
+      </div>
+      <div class="card">
+        <h3>Verification</h3>
+        <p>Stateless verification rules usable by any independent party.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="alt" id="security">
+    <h2>Security & trust</h2>
     <div class="grid two">
       <div class="card">
+        <h3>Cryptographic integrity</h3>
         <p>
-          ❌ Not execution<br/>
-          ❌ Not enforcement<br/>
-          ❌ Not monitoring
+          ActProofs relies on standard cryptographic primitives.
+          Any tampering invalidates the proof.
         </p>
       </div>
       <div class="card">
+        <h3>No implicit trust</h3>
         <p>
-          ❌ Not IAM<br/>
-          ❌ Not access control<br/>
-          ❌ Not policy engines
+          Verification does not rely on trusting a platform or issuer.
+          Proofs are self-contained and portable.
         </p>
       </div>
     </div>
-    <p class="center">ActProofs proves authorization. Nothing more.</p>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- PROOF OF RELEASE (CLONE SURFACE)                                      -->
-  <!-- =================================================================== -->
-  <section>
+  <!-- COMPLIANCE -->
+  <section id="compliance">
+    <h2>Governance & compliance</h2>
+    <div class="grid three">
+      <div class="card">
+        <h3>Accountability</h3>
+        <p>Clear attribution of authorization decisions.</p>
+      </div>
+      <div class="card">
+        <h3>Audit-ready</h3>
+        <p>Portable artifacts suitable for audits and investigations.</p>
+      </div>
+      <div class="card">
+        <h3>Regulatory alignment</h3>
+        <p>Designed to support modern governance expectations.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF OF RELEASE -->
+  <section class="alt" id="proof-of-release">
     <h2>Proof of release</h2>
     <div class="card">
       <p>
-        This website release is itself covered by an ActProof-style authorization
-        receipt, demonstrating the integrity and declared intent of this publication.
+        This website release is itself accompanied by an authorization-style receipt,
+        demonstrating declared intent and integrity at publication time.
       </p>
       <pre>
 Release: ActProofs Website
 Version: v0.1
-Date (UTC): 2026-01-03T20:45:00Z
+Date (UTC): 2026-01-03T21:00:00Z
 SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
       </pre>
       <p>
-        This block mirrors the Proof of Release concept used in TimeProofs,
-        adapted to authorization evidence.
+        This mirrors the Proof of Release concept used in related standards,
+        adapted here for authorization evidence.
       </p>
     </div>
   </section>
 
-  <!-- =================================================================== -->
-  <!-- GOVERNANCE                                                           -->
-  <!-- =================================================================== -->
-  <section class="alt">
-    <h2>Governance & standard</h2>
-    <div class="grid three">
-      <div class="card">
-        <h3>Open specification</h3>
-        <p>The protocol is public, documented, and designed for independent verification.</p>
-      </div>
-      <div class="card">
-        <h3>Neutral & stateless</h3>
-        <p>No central storage, no platform lock-in, no implicit trust.</p>
-      </div>
-      <div class="card">
-        <h3>Audit-oriented</h3>
-        <p>Designed for accountability, compliance, and responsibility chains.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- =================================================================== -->
-  <!-- RELATION TO TIMEPROOFS                                                -->
-  <!-- =================================================================== -->
-  <section>
+  <!-- RELATION -->
+  <section id="relation">
     <h2>Relation to TimeProofs</h2>
     <div class="card">
       <p>
-        TimeProofs proves <strong>when something existed</strong>.<br/>
+        TimeProofs proves <strong>when something existed</strong>.
         ActProofs proves <strong>that something was authorized</strong>.
       </p>
       <p>
-        The two standards are complementary and address different layers of trust.
+        The two standards are complementary and address different layers of trust
+        in automated systems.
       </p>
     </div>
   </section>
+
 </main>
 
 <footer>
   <p>Open standard · Privacy-first · Stateless · Verifiable</p>
-  <p>
-    <a href="/spec.html">Specification</a> ·
-    <a href="/security.html">Security</a> ·
+  <div class="links">
+    <a href="/spec.html">Specification</a>
+    <a href="/docs.html">Docs</a>
+    <a href="/security.html">Security</a>
     <a href="/legal.html">Legal</a>
-  </p>
+  </div>
 </footer>
 
 <script nonce="AP-2026">
@@ -495,4 +555,4 @@ SHA-256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
   });
 </script>
 </body>
-    </html>
+</html>
