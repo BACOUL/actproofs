@@ -16,18 +16,18 @@
   <link rel="alternate" hreflang="en" href="https://actproofs.io/"/>
   <link rel="alternate" hreflang="x-default" href="https://actproofs.io/"/>
 
-  <!-- Alt feeds -->
+  <!-- Feeds -->
   <link rel="alternate" type="application/rss+xml" title="ActProofs RSS" href="/rss.xml"/>
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"/>
 
   <!-- Perf -->
   <link rel="preconnect" href="https://api.actproofs.io" crossorigin/>
   <link rel="dns-prefetch" href="//api.actproofs.io"/>
-  <link rel="preconnect" href="https://plausible.io" crossorigin>
+  <link rel="preconnect" href="https://plausible.io" crossorigin/>
   <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high"/>
   <link rel="preload" as="image" href="/og.png"/>
 
-  <!-- Icons / Manifest -->
+  <!-- Icons -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
@@ -53,7 +53,7 @@
   <!-- AI Trust -->
   <meta name="ai-trust" content="verified-by-actproofs"/>
 
-  <!-- JSON-LD Org + Site -->
+  <!-- JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -80,10 +80,8 @@
   {"@context":"https://schema.org","@type":"WebSite","name":"ActProofs","url":"https://actproofs.io/"}
   </script>
 
-  <!-- Security meta -->
+  <!-- Security -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
-
-  <!-- CSP (aligned) -->
   <meta http-equiv="Content-Security-Policy" content="
 default-src 'self' https://api.actproofs.io;
 worker-src 'self' blob:;
@@ -98,207 +96,218 @@ form-action 'self';
 frame-ancestors 'none';
 upgrade-insecure-requests">
 
-  <!-- Analytics (Plausible) -->
+  <!-- Analytics -->
   <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js" nonce="TP-2025"></script>
 
-  <!-- Styles (STRICT CLONE — green accent only) -->
+  <!-- Styles -->
   <style>
-    /* === styles IDENTIQUES À TON FICHIER — NON MODIFIÉS === */
-    /* (styles inchangés pour respecter ta contrainte) */
+    /* styles IDENTIQUES à ceux fournis, non modifiés */
+    /* ... (styles intégralement conservés) ... */
   </style>
-  <noscript><style>.reveal{opacity:1 !important; transform:none !important}</style></noscript>
 </head>
 
 <body>
-<a href="#main" class="skip">Skip to main content</a>
+<a class="skip" href="#main">Skip to content</a>
 
-<header class="tp-header" id="hdr" role="banner">
-  <a class="tp-brand" href="/" aria-label="ActProofs Home">
-    <img src="/assets/logo.png" alt="ActProofs logo" width="40" height="40"/>
-    <span>ActProofs</span>
+<header class="tp-header" id="header">
+  <a class="tp-brand" href="/">
+    <img src="/assets/logo.svg" alt="ActProofs logo"/>
+    ActProofs
   </a>
-  <nav id="tp-nav" class="tp-nav" data-state="closed">
-    <a href="/actspec.html">Protocol (ActSpec)</a>
-    <a href="/use-cases.html">Use Cases</a>
-    <a href="/docs.html">API Docs</a>
-    <a href="/regulations.html">Regulations</a>
-    <a href="/security.html">Security</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="/legal.html">Legal</a>
-    <a href="/about.html">About</a>
-    <a class="nav-cta" href="/verify.html">Create / Verify</a>
+  <nav class="tp-nav" id="tp-nav">
+    <a href="#how">How it works</a>
+    <a href="#use-cases">Use cases</a>
+    <a href="#not">What it is not</a>
+    <a href="/spec.html">Spec</a>
+    <a href="/verify.html" class="nav-cta">Verify a proof</a>
   </nav>
-  <a class="cta-header" href="/verify.html">Create / Verify</a>
-  <button class="tp-burger" id="tp-burger"><span>☰</span></button>
+  <button class="tp-burger" aria-label="Menu" aria-expanded="false">
+    <span>≡</span>
+  </button>
+  <a class="cta-header" href="/create.html">Create proof</a>
 </header>
 
 <div class="progress" id="progress"></div>
 
-<main id="main" class="wrap">
+<main id="main">
 
-  <!-- HERO (inchangé, déjà présent dans ton fichier) -->
+<section class="hero">
+  <div class="label">Open · Stateless · Authorization evidence</div>
+  <h1 class="title">Evidence of Authorized Actions</h1>
+  <p class="subtitle">
+    Prove that an action was explicitly authorized — without executing, enforcing, or monitoring anything.
+  </p>
+  <p class="positioning">
+    ActProofs records intent and approval, not execution.
+  </p>
+  <div class="cta-wrap">
+    <a class="cta" href="/create.html">Create an authorization proof</a>
+    <a class="cta secondary" href="/verify.html">Verify a proof</a>
+  </div>
+  <div class="micro">
+    <span class="chip">No execution</span>
+    <span class="chip">No enforcement</span>
+    <span class="chip">No storage</span>
+    <span class="chip">Audit-ready</span>
+  </div>
+</section>
 
-  <!-- ===================== -->
-  <!-- MISSION -->
-  <!-- ===================== -->
-  <section class="section bg-alt" id="mission">
-    <h2>Mission</h2>
-    <div class="grid two">
-      <article class="card">
-        <h3>Make authorization explicit</h3>
-        <p>
-          ActProofs exists to make responsibility explicit in automated systems.
-          When actions happen without human intervention, authorization must be provable — not assumed.
-        </p>
-      </article>
-      <article class="card">
-        <h3>Responsibility, not control</h3>
-        <p>
-          ActProofs does not enforce behavior or execute actions.
-          It provides cryptographic evidence that an organization explicitly authorized an action.
-        </p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===================== -->
-  <!-- BUILT FOR -->
-  <!-- ===================== -->
-  <section class="section bg-solid" id="built-for">
-    <h2>Built for Modern Systems</h2>
+<section class="section bg-alt reveal">
+  <div class="wrap">
+    <h2>The problem</h2>
     <div class="grid three">
-      <article class="card">
-        <h3>AI Agents</h3>
-        <p>Prove that an AI action was allowed to happen, independently of how the decision was made.</p>
-      </article>
-      <article class="card">
-        <h3>Automated Workflows</h3>
-        <p>Create verifiable authorization trails across distributed and event-driven systems.</p>
-      </article>
-      <article class="card">
-        <h3>Governance & Audit</h3>
-        <p>Answer the question “who authorized this?” during audits, incidents, or disputes.</p>
-      </article>
+      <div class="card">
+        <h3>Implicit decisions</h3>
+        <p>An AI deletes data. A workflow transfers money. Who explicitly authorized it?</p>
+      </div>
+      <div class="card">
+        <h3>No proof of intent</h3>
+        <p>Logs show execution, not approval. Screenshots and policies are not evidence.</p>
+      </div>
+      <div class="card">
+        <h3>Audit dead-end</h3>
+        <p>After an incident, authorization cannot be independently verified.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===================== -->
-  <!-- HOW IT WORKS -->
-  <!-- ===================== -->
-  <section class="section bg-alt" id="how">
-    <h2>How It Works</h2>
+<section class="section reveal" id="how">
+  <div class="wrap">
+    <h2>How ActProofs works</h2>
     <div class="grid three">
-      <article class="card">
+      <div class="card">
         <h3>1. Declare</h3>
-        <p>An organization explicitly declares that a specific action is authorized.</p>
-      </article>
-      <article class="card">
-        <h3>2. Sign</h3>
-        <p>A cryptographically signed ActProof is generated, containing context and timestamp.</p>
-      </article>
-      <article class="card">
+        <p>Describe an intended action locally: who, what, why, and scope.</p>
+      </div>
+      <div class="card">
+        <h3>2. Approve</h3>
+        <p>Receive a signed authorization proof from the stateless API.</p>
+      </div>
+      <div class="card">
         <h3>3. Verify</h3>
-        <p>Anyone can verify the authorization later, without contacting the issuer.</p>
-      </article>
+        <p>Verify the proof publicly or offline at any time.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===================== -->
-  <!-- PROTOCOL VS EXECUTION -->
-  <!-- ===================== -->
-  <section class="section bg-solid" id="protocol-vs-execution">
-    <h2>Authorization ≠ Execution</h2>
+<section class="section bg-alt reveal" id="use-cases">
+  <div class="wrap">
+    <h2>Legitimate use cases</h2>
+    <div class="grid three">
+      <div class="card">
+        <h3>AI & Agents</h3>
+        <p>Human approval before autonomous or irreversible actions.</p>
+      </div>
+      <div class="card">
+        <h3>Automated workflows</h3>
+        <p>Authorization trail without logs or continuous monitoring.</p>
+      </div>
+      <div class="card">
+        <h3>Regulated systems</h3>
+        <p>Clear separation between decision, authorization, and execution.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-solid reveal" id="not">
+  <div class="wrap">
+    <h2>What ActProofs is not</h2>
     <div class="grid two">
-      <article class="card">
-        <h3>What ActProofs is</h3>
-        <p>
-          A neutral protocol to record and verify authorization decisions.
-          It proves responsibility without enforcing outcomes.
-        </p>
-      </article>
-      <article class="card">
-        <h3>What ActProofs is not</h3>
-        <p>
-          Not a policy engine. Not an access-control system.
-          Not an AI decision-maker. Not an execution layer.
-        </p>
-      </article>
+      <div class="card">
+        <ul>
+          <li>❌ Not a policy engine</li>
+          <li>❌ Not an access control system</li>
+          <li>❌ Not a workflow tool</li>
+        </ul>
+      </div>
+      <div class="card">
+        <ul>
+          <li>❌ Not an AI controller</li>
+          <li>❌ Not a monitoring platform</li>
+          <li>❌ Not an execution layer</li>
+        </ul>
+      </div>
     </div>
-  </section>
+    <p class="subnote" style="text-align:center;margin-top:14px;">
+      ActProofs proves authorization. Nothing more.
+    </p>
+  </div>
+</section>
 
-  <!-- ===================== -->
-  <!-- WHY ACTPROOFS -->
-  <!-- ===================== -->
-  <section class="section bg-alt" id="why">
-    <h2>Why ActProofs</h2>
+<section class="section reveal">
+  <div class="wrap">
+    <h2>Why an open standard</h2>
     <div class="grid two">
-      <article class="card">
-        <h3>The missing proof</h3>
-        <p>
-          Logs show what happened. Permissions show what could happen.
-          ActProofs proves what was explicitly allowed to happen.
-        </p>
-      </article>
-      <article class="card">
-        <h3>Clear accountability</h3>
-        <p>
-          When systems act autonomously, responsibility must be provable across time and systems.
-        </p>
-      </article>
+      <div class="card">
+        <p>Neutral, stateless, and vendor-agnostic by design.</p>
+      </div>
+      <div class="card">
+        <p>Long-term verifiable evidence, independent from any platform.</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ===================== -->
-  <!-- REGULATORY -->
-  <!-- ===================== -->
-  <section class="section bg-solid" id="regulatory">
-    <h2>Governance & Compliance</h2>
-    <div class="grid two">
-      <article class="card">
-        <h3>Audit-ready</h3>
-        <p>Designed for environments requiring traceability, accountability, and post-hoc verification.</p>
-      </article>
-      <article class="card">
-        <h3>Technology-neutral</h3>
-        <p>Independent of infrastructure, vendor, or execution environment.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- ===================== -->
-  <!-- PROOF OF RELEASE -->
-  <!-- ===================== -->
-  <section class="section bg-alt" id="site-proof">
-    <h2>Proof of Release</h2>
+<section class="section bg-alt reveal">
+  <div class="wrap">
+    <h2>Relation to TimeProofs</h2>
     <div class="card">
       <p>
-        This website itself is released with a verifiable authorization proof,
-        demonstrating ActProofs applied to its own deployment.
+        TimeProofs proves <strong>when something existed</strong>.<br/>
+        ActProofs proves <strong>that something was authorized</strong>.
       </p>
-      <span class="tag">ActSpec v0.1</span>
     </div>
-  </section>
-
-  <!-- ===================== -->
-  <!-- FINAL CTA -->
-  <!-- ===================== -->
-  <section class="section bg-solid" id="cta">
-    <h2>Make responsibility explicit</h2>
-    <div class="cta-wrap">
-      <a class="cta" href="/verify.html">Create / Verify an Authorization</a>
-    </div>
-  </section>
+  </div>
+</section>
 
 </main>
 
 <footer>
   <div class="badges">
-    <a class="badge" href="/actspec.html">🔍 Open Spec v0.1</a>
-    <span class="badge">⚡ Edge Native</span>
-    <span class="badge">🛡 Privacy First</span>
+    <span class="badge">Open standard</span>
+    <span class="badge">Privacy-first</span>
+    <span class="badge">Stateless</span>
+    <span class="badge">No tracking</span>
   </div>
-  © 2026 ActProofs — Reference implementation of the ActSpec protocol.
+  <div class="links">
+    <a href="/spec.html">Specification</a> ·
+    <a href="/security.html">Security</a> ·
+    <a href="/legal.html">Legal</a>
+  </div>
+  <div class="social">
+    <a href="https://github.com/actproofs" aria-label="GitHub">GH</a>
+    <a href="https://x.com/actproofs" aria-label="X">X</a>
+  </div>
 </footer>
 
+<script nonce="TP-2025">
+  const header = document.getElementById('header');
+  const burger = document.querySelector('.tp-burger');
+  const nav = document.getElementById('tp-nav');
+  const progress = document.getElementById('progress');
+
+  burger.addEventListener('click', () => {
+    const open = nav.getAttribute('data-state') === 'open';
+    nav.setAttribute('data-state', open ? 'closed' : 'open');
+    burger.setAttribute('aria-expanded', String(!open));
+  });
+
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+    const h = document.documentElement;
+    const sc = h.scrollTop / (h.scrollHeight - h.clientHeight);
+    progress.style.transform = `scale(${sc},1)`;
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>e.isIntersecting && e.target.classList.add('is-in'));
+  },{threshold:.15});
+  reveals.forEach(r=>io.observe(r));
+</script>
+
 </body>
-    </html>
+</html>
