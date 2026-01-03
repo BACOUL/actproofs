@@ -6,152 +6,158 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta name="color-scheme" content="dark light"/>
   <title>ActProofs — Evidence of Authorized Automated Actions</title>
+
   <meta name="application-name" content="ActProofs"/>
-  <meta name="description" content="ActProofs provides independent, cryptographic evidence that a specific automated action (notably involving AI) was explicitly authorized by a known actor or organization, in a defined context, at a specific point in time."/>
-  <meta name="keywords" content="authorization proof,automated actions,AI governance,compliance,audit,accountability,ActProofs,proof of authorization"/>
+  <meta name="description" content="ActProofs provides cryptographic, portable proof that an automated action (including AI-driven actions) was explicitly authorized by a known actor or organization, in a defined context, at a specific time."/>
+  <meta name="keywords" content="authorization proof,automated actions,AI governance,accountability,compliance,audit trail,ActProofs,AI Act,NIS2"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="theme-color" content="#071b12"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-  <meta name="ai-trust" content="verified-by-actproofs"/>
+  <meta name="theme-color" content="#06140e"/>
+
   <link rel="canonical" href="https://actproofs.io/"/>
-
-  <!-- Feeds / Docs -->
-  <link rel="sitemap" type="application/xml" href="/sitemap.xml"/>
-  <link rel="author" href="/humans.txt"/>
-
-  <!-- Perf -->
-  <link rel="preconnect" href="https://plausible.io" crossorigin/>
-  <link rel="preload" as="image" href="/assets/logo.png" fetchpriority="high"/>
+  <link rel="alternate" hreflang="en" href="https://actproofs.io/"/>
 
   <!-- Icons -->
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png"/>
 
-  <!-- Social -->
-  <meta property="og:title" content="ActProofs — Evidence of Authorized Automated Actions"/>
-  <meta property="og:description" content="Independent, verifiable evidence that an automated action was explicitly authorized by a responsible entity."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://actproofs.io/"/>
-  <meta property="og:site_name" content="ActProofs"/>
-  <meta property="og:locale" content="en_US"/>
-
-  <!-- Analytics -->
-  <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js"></script>
+  <!-- Security -->
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()"/>
 
   <!-- Styles -->
   <style>
     :root{
-      --bg:#060b12;
-      --bg2:#071b12;
-      --panel:#0b2418;
-      --line:#113d2a;
-      --text:#f8fafc;
-      --muted:#9fb9ad;
-      --accent:#3bd671;
-      --ring:0 0 0 1px #113d2a,0 12px 40px rgba(59,214,113,.18);
-      --e:cubic-bezier(.22,.61,.36,1)
+      --bg:#06140e;
+      --bg2:#081a12;
+      --panel:#0b2218;
+      --line:#123326;
+      --text:#ecfdf5;
+      --muted:#9fbfb0;
+      --accent:#22c55e;
+      --accent2:#16a34a;
+      --warn:#f59e0b;
+      --err:#ef4444;
+      --ring:0 0 0 1px #123326, 0 12px 40px rgba(34,197,94,.18);
+      --e:cubic-bezier(.22,.61,.36,1);
     }
+
     *{ box-sizing:border-box }
-
-    html{
-      height:100%; max-width:100%; overflow-x:hidden;
-      background:var(--bg);
-      scroll-behavior:smooth;
-      scroll-padding-top:120px;
-    }
-
+    html{ background:var(--bg); scroll-behavior:smooth }
     body{
-      margin:0; color:var(--text);
-      font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      margin:0;
+      font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(59,214,113,.08), transparent 60%),
+        radial-gradient(900px 500px at 80% -10%, rgba(34,197,94,.08), transparent 60%),
         linear-gradient(180deg,var(--bg),var(--bg2));
     }
 
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
 
-    /* Header */
-    .tp-header{
-      position:fixed; inset:0 0 auto 0; height:64px; z-index:1000;
-      background:rgba(6,11,18,.75); backdrop-filter:blur(10px);
+    header{
+      position:fixed; top:0; left:0; right:0;
+      height:64px;
+      background:rgba(6,20,14,.75);
+      backdrop-filter:blur(10px);
       border-bottom:1px solid var(--line);
-      display:flex; align-items:center; gap:12px; padding:0 16px;
-      transition:background .25s var(--e)
-    }
-    .tp-header.scrolled{ background:rgba(6,11,18,.92) }
-
-    .tp-brand{
-      display:flex; align-items:center; gap:10px;
-      font-weight:900; font-size:1.05rem; color:var(--text);
-      text-decoration:none; margin-right:auto
-    }
-    .tp-brand img{ height:40px; width:40px }
-
-    .tp-nav a{
-      color:var(--text); font-weight:700; margin-left:18px;
-      padding:10px 0; display:inline-block
-    }
-    .tp-nav a:hover{ color:var(--accent) }
-
-    .cta-header{
-      display:none; align-items:center; justify-content:center;
-      height:40px; padding:0 14px; border-radius:10px;
-      background:var(--accent); color:#052014;
-      font-weight:800;
-      box-shadow:0 6px 24px rgba(59,214,113,.25)
-    }
-
-    @media (min-width:900px){
-      .tp-nav{ display:flex; align-items:center }
-      .cta-header{ display:inline-flex }
+      z-index:1000;
+      display:flex; align-items:center;
     }
 
     .wrap{ max-width:1200px; margin:0 auto; padding:0 16px }
 
-    .hero{
-      min-height:calc(100svh - 64px);
-      padding-top:120px;
-      display:flex; flex-direction:column;
-      align-items:center; text-align:center
-    }
-
-    .label{
-      padding:6px 14px;
-      border:1px solid #1f6f4a;
-      background:#0b2418;
-      border-radius:999px;
-      font-size:.85rem;
-      margin-bottom:14px
-    }
-
-    .title{
-      font-size:clamp(2.4rem,6vw,3.6rem);
+    .brand{
+      display:flex; align-items:center; gap:10px;
       font-weight:900;
-      margin:.2em 0;
-      background:linear-gradient(90deg,#eafff4,#a8f3c9,#eafff4);
+      color:var(--text);
+    }
+    .brand img{ width:36px; height:36px }
+
+    nav{
+      margin-left:auto;
+      display:flex; gap:18px;
+      font-weight:700;
+    }
+
+    main{ padding-top:96px }
+
+    .hero{
+      min-height:calc(100vh - 96px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#0b2a1c;
+      border:1px solid #14532d;
+      color:#bbf7d0;
+      font-size:.85rem;
+      margin-bottom:14px;
+    }
+
+    h1{
+      font-size:clamp(2.2rem,6vw,3.4rem);
+      line-height:1.05;
+      margin:0 0 14px;
+      font-weight:900;
+      background:linear-gradient(90deg,#dcfce7,#86efac,#dcfce7);
       -webkit-background-clip:text;
-      color:transparent
+      background-clip:text;
+      color:transparent;
     }
 
     .subtitle{
-      max-width:920px;
+      max-width:900px;
       color:var(--muted);
-      font-size:1.1rem
+      font-size:clamp(1rem,2.6vw,1.15rem);
     }
 
-    .section{ padding:44px 0 }
+    .cta-row{
+      display:flex;
+      gap:12px;
+      margin-top:18px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
 
-    .section h2{
+    .cta{
+      padding:14px 18px;
+      border-radius:12px;
+      font-weight:800;
+      background:var(--accent);
+      color:#052e16;
+      box-shadow:0 10px 30px rgba(34,197,94,.25);
+    }
+    .cta.secondary{
+      background:#0b2218;
+      color:#bbf7d0;
+      border:1px solid var(--line);
+    }
+
+    section{ padding:56px 0 }
+
+    h2{
       text-align:center;
-      color:#c8ffe3;
-      margin-bottom:16px
+      font-size:clamp(1.4rem,3vw,1.8rem);
+      margin-bottom:18px;
+      color:#bbf7d0;
     }
 
-    .grid{ display:grid; gap:18px }
+    .grid{
+      display:grid;
+      gap:16px;
+    }
     @media(min-width:900px){
       .grid.three{ grid-template-columns:repeat(3,1fr) }
+      .grid.two{ grid-template-columns:repeat(2,1fr) }
     }
 
     .card{
@@ -159,104 +165,148 @@
       border:1px solid var(--line);
       border-radius:16px;
       padding:20px;
-      box-shadow:var(--ring)
+      box-shadow:var(--ring);
+    }
+
+    .card h3{
+      margin-top:0;
+      color:var(--accent);
     }
 
     footer{
       border-top:1px solid var(--line);
-      padding:24px;
+      padding:24px 16px;
       text-align:center;
-      color:#7fae97;
-      background:#060b12
+      color:var(--muted);
+      background:var(--bg);
     }
   </style>
 </head>
 
 <body>
-<header class="tp-header" id="hdr">
-  <a class="tp-brand" href="/">
-    <img src="/assets/logo.png" alt="ActProofs logo"/>
-    <span>ActProofs</span>
-  </a>
-  <nav class="tp-nav">
-    <a href="#what">What</a>
-    <a href="#how">How</a>
-    <a href="#use">Use cases</a>
-    <a href="/actproof-spec.html">Specification</a>
-    <a href="/regulations.html">Governance</a>
-    <a href="/about.html">About</a>
-  </nav>
-  <a class="cta-header" href="/request-access.html">Request Access</a>
+<header>
+  <div class="wrap" style="display:flex;align-items:center">
+    <a class="brand" href="/">
+      <img src="/assets/logo.svg" alt="ActProofs logo"/>
+      <span>ActProofs</span>
+    </a>
+    <nav>
+      <a href="/spec.html">Specification</a>
+      <a href="/use-cases.html">Use cases</a>
+      <a href="/regulations.html">Regulations</a>
+      <a href="/docs.html">Docs</a>
+      <a href="/security.html">Security</a>
+    </nav>
+  </div>
 </header>
 
-<main class="wrap" id="main">
+<main class="wrap">
   <section class="hero">
-    <div class="label">Draft standard · v0.1</div>
-    <h1 class="title">Evidence of authorized automated actions</h1>
+    <span class="badge">Authorization proof · Automated actions · AI governance</span>
+    <h1>Evidence that an automated action was explicitly authorized.</h1>
     <p class="subtitle">
-      ActProofs provides cryptographic evidence that an automated action
-      was explicitly authorized by a known actor or organization,
-      in a defined context, at a specific point in time.
+      ActProofs provides a cryptographic, portable receipt proving that a specific automated
+      action — including AI-driven actions — was authorized by a known actor or organization,
+      in a defined context, at a precise point in time.
     </p>
+    <div class="cta-row">
+      <a class="cta" href="/spec.html">Read the specification</a>
+      <a class="cta secondary" href="/docs.html">Developer documentation</a>
+    </div>
   </section>
 
-  <section class="section" id="what">
-    <h2>What ActProofs is</h2>
+  <section>
+    <h2>Why ActProofs exists</h2>
     <div class="grid three">
       <div class="card">
-        <h3>Authorization proof</h3>
-        <p>A standardized, portable proof of an authorization decision.</p>
+        <h3>Automation is accountable</h3>
+        <p>
+          Automated systems and AI agents trigger actions with legal, financial,
+          or operational impact. Someone must be responsible for authorizing them.
+        </p>
       </div>
       <div class="card">
-        <h3>Compliance evidence</h3>
-        <p>Designed for audits, governance, and regulatory accountability.</p>
+        <h3>Logs are not evidence</h3>
+        <p>
+          Internal logs are mutable, non-portable, and rarely opposable.
+          They do not constitute independent proof of authorization.
+        </p>
       </div>
       <div class="card">
-        <h3>Independent verification</h3>
-        <p>Verifiable without trusting internal systems or vendors.</p>
+        <h3>Regulation requires proof</h3>
+        <p>
+          AI Act, NIS2, audits, and insurance processes increasingly require
+          demonstrable authorization of automated decisions.
+        </p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="how">
+  <section>
+    <h2>What ActProofs is (and is not)</h2>
+    <div class="grid three">
+      <div class="card">
+        <h3>What it is</h3>
+        <ul>
+          <li>Proof of authorization</li>
+          <li>Cryptographic receipt</li>
+          <li>Portable and verifiable file</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What it guarantees</h3>
+        <ul>
+          <li>An action was authorized</li>
+          <li>By a declared actor or entity</li>
+          <li>At a specific time, in context</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What it is not</h3>
+        <ul>
+          <li>No execution engine</li>
+          <li>No identity management</li>
+          <li>No access control system</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2>Mental model</h2>
-    <p style="text-align:center;color:var(--muted)">
-      Identified actor → Authorization → ActProof → Action (out of scope)
+    <div class="grid two">
+      <div class="card">
+        <p><strong>Actor / Organization</strong> explicitly authorizes an automated action.</p>
+      </div>
+      <div class="card">
+        <p><strong>ActProof</strong> is generated and attached to the action as evidence.</p>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--muted);margin-top:12px">
+      ActProofs records authorization only. Execution remains out of scope.
     </p>
   </section>
 
-  <section class="section" id="use">
+  <section>
     <h2>Typical use cases</h2>
     <div class="grid three">
       <div class="card">AI agent action approval</div>
-      <div class="card">Automated workflows in regulated systems</div>
-      <div class="card">Audit & liability documentation</div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2>What ActProofs is not</h2>
-    <div class="grid three">
-      <div class="card">Not execution</div>
-      <div class="card">Not IAM</div>
-      <div class="card">Not logging</div>
+      <div class="card">Human-in-the-loop authorization</div>
+      <div class="card">Audit & compliance evidence</div>
+      <div class="card">Insurance & liability documentation</div>
+      <div class="card">Critical system operations</div>
+      <div class="card">Regulated automated workflows</div>
     </div>
   </section>
 </main>
 
 <footer>
-  © 2026 ActProofs — Open standard for evidence of authorized automated actions
+  © 2026 ActProofs — Proof of authorization for automated actions.  
+  <div style="margin-top:8px">
+    <a href="/legal.html">Legal</a> ·
+    <a href="/privacy.html">Privacy</a> ·
+    <a href="/security.html">Security</a>
+  </div>
 </footer>
-
-<script>
-(function(){
-  const hdr=document.getElementById('hdr');
-  function onScroll(){
-    window.scrollY>6 ? hdr.classList.add('scrolled') : hdr.classList.remove('scrolled');
-  }
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive:true });
-})();
-</script>
 </body>
 </html>
