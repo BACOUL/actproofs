@@ -1,171 +1,156 @@
-# 🧩 TimeProofs — Proof of Existence for Everything
+# ActProofs
 
-**TimeProofs** is a free, open, privacy-first timestamp API.  
-Hash locally, get a signed timestamp, verify publicly — with **zero personal data**, **no blockchain**, and **full transparency**.
+ActProofs is an open standard for proof of authorization of automated actions.
 
-Website → https://timeproofs.io  
-API → https://api.timeproofs.io  
-Status → Public Beta v0.1
+It produces a cryptographic, portable, and independently verifiable receipt proving that a specific automated action (notably involving AI) was explicitly authorized by an identified actor or entity, in a defined context, at a specific point in time.
 
----
-
-## ✨ Features (v0.1)
-
-- Hash-only inputs (no upload)
-- Signed timestamp events
-- Public verification endpoint
-- Stateless & privacy-first (no logs of content)
-- Edge-native (Cloudflare Workers)
-- Proof bundle format: `.tproof.json`
-- Full site integrity: each page loads its hash from `/releases/v0.1.json`
+ActProofs is designed for compliance, auditability, accountability, and governance of automated and AI-driven systems.
 
 ---
 
-## 🚀 Try in 30 Seconds
+WHY ACTPROOFS EXISTS
 
-### 1. Hash any file
-```sh
-sha256sum myfile.png
-```
+Modern systems increasingly rely on automated workflows and AI agents capable of triggering actions with real-world impact.
 
-### 2. Request a timestamp
-```sh
-curl -X POST https://api.timeproofs.io/api/timestamp \
-  -H "Content-Type: application/json" \
-  -d '{"hash":"<SHA256>"}'
-```
+Regulators, auditors, insurers, and governance teams are asking a fundamental question:
+Who authorized this automated action, and when?
 
-### 3. Verify
-```sh
-curl "https://api.timeproofs.io/api/verify?hash=<SHA256>"
-```
+Today, the market provides only:
+- internal logs (mutable, non-portable, non-opposable),
+- IAM / RBAC systems (access control, not proof),
+- execution traces (post-hoc, incomplete),
+- blockchain-based approaches (heavy, misaligned, and unnecessary).
 
-You will get:
-```json
-{
-  "ok": true,
-  "hash": "<SHA256>",
-  "ts": 123456789,
-  "timestamp_iso": "2025-11-16T16:54:05Z",
-  "version": "v0.1",
-  "type": "event",
-  "verify_url": "https://api.timeproofs.io/api/verify?hash=<SHA256>"
-}
-```
+There is no standard, portable, opposable proof of authorization.
+
+ActProofs fills this gap.
 
 ---
 
-## 🔌 API Reference (v0.1)
+WHAT ACTPROOFS IS
 
-### `POST /api/timestamp`
-Body:
-```json
-{ "hash": "..." }
-```
+ActProofs is:
+- a standardized proof format for authorization decisions,
+- a cryptographic receipt that can be stored, shared, and audited,
+- stateless by design (no server-side storage required),
+- verification-first (no implicit trust in the issuer),
+- a compliance and governance building block.
 
-Returns:
-```json
-{
-  "ok": true,
-  "hash": "...",
-  "ts": 123456789,
-  "timestamp_iso": "...",
-  "version": "v0.1",
-  "type": "event",
-  "verify_url": "https://api.timeproofs.io/api/verify?hash=..."
-}
-```
+Mental model:
+Identified actor → Authorization → ActProof → Action (out of scope)
 
 ---
 
-### `GET /api/verify?hash=...`
-Checks if a hash has been timestamped.
+WHAT ACTPROOFS IS NOT
 
-Returns:
-```json
-{
-  "ok": true,
-  "verified": true,
-  "hash": "...",
-  "timestamp_iso": "...",
-  "version": "v0.1"
-}
-```
+ActProofs does not:
+- execute actions,
+- trigger workflows,
+- enforce authorization,
+- manage identities,
+- authenticate users or systems,
+- replace IAM, RBAC, SSO, or PKI,
+- store logs or content,
+- use blockchain or distributed ledgers.
 
----
-
-## 📦 Release Integrity (v0.1)
-
-**Official site hash:**  
-```
-41746697c470098393486fb62de886a997875ebfca1b372b574ecf0bbd95b264
-```
-
-**Verify with TimeProofs:**  
-https://api.timeproofs.io/api/verify?hash=41746697c470098393486fb62de886a997875ebfca1b372b574ecf0bbd95b264
-
-**Release proof bundle:**  
-`/release-v0.1.tproof.json` (included in this repository)
-
-This repository and the deployed site are fully **self-verifiable**.
+ActProofs records authorization decisions only.
 
 ---
 
-## 🔐 Privacy
+CORE PRINCIPLES
 
-TimeProofs never stores or receives:
-- files  
-- personal data  
-- content  
-- metadata about users  
+1. Identified initiator  
+The actor, organization, or system authorizing the action is known and explicitly declared.
 
-The only input is a **SHA-256 hash**.
+2. No identity management  
+ActProofs records declared identity context but does not verify or manage identities.
 
----
+3. No execution  
+Authorization proof is independent from action execution.
 
-## 📚 Documentation
+4. Stateless by design  
+No server-side storage is required to validate a proof.
 
-Protocol (ProofSpec):  
-https://timeproofs.io/proofspec.html
+5. Independent verification  
+Any third party can verify an ActProof without trusting the issuer.
 
-API Docs:  
-https://timeproofs.io/docs.html
-
-Use Cases:  
-https://timeproofs.io/use-cases.html
-
-Security & CSP:  
-https://timeproofs.io/security.html
+6. Portable and durable  
+Proofs are files, not database records.
 
 ---
 
-## 🗂 Project Structure (v0.1)
+THE ACTPROOF (CONCEPT)
 
-```
-/index.html
-/verify.html
-/proofspec.html
-/use-cases.html
-/docs.html
-/security.html
-/privacy.html
-/legal.html
-/about.html
-/releases/v0.1.json
-/release-v0.1.tproof.json
-/sw.js
-/assets/*
-```
+An ActProof is a self-contained file (for example, .actproof.json) that cryptographically binds:
+- the authorized action,
+- the identified authorizing actor or entity,
+- the context (system, purpose, scope),
+- a timestamp,
+- a digital signature.
+
+The proof can be archived, shared, audited, or provided to regulators, insurers, or third parties.
+Verification is possible at any time without access to internal systems.
+
+The exact format is defined by the ActProofs specification.
 
 ---
 
-## 🧾 License
+REGULATORY ALIGNMENT
 
-This project is licensed under the **MPL-2.0 License**.
+ActProofs is designed to support requirements related to:
+- AI governance and accountability,
+- automated decision oversight,
+- audit and risk management,
+- cybersecurity and operational resilience,
+- insurance and liability assessment.
+
+It directly addresses a recurring regulatory expectation:
+Demonstrate that an automated action was explicitly authorized by a responsible entity.
+
+This is achieved without storing personal data, executing actions, or centralizing logs.
 
 ---
 
-## 🛠 Maintainer
+TYPICAL USE CASES
 
-TimeProofs is developed and maintained by Jeason Bacoul.  
-Follow updates on: https://github.com/BACOUL/timeproofs
+- Authorization of AI-driven actions before execution
+- Approval of automated workflows in regulated environments
+- Human-in-the-loop authorization evidence
+- Audit trails for AI systems
+- Insurance and liability documentation
+- Governance of autonomous or semi-autonomous agents
+- Approval records for critical system actions
+
+---
+
+POSITIONING
+
+ActProofs sits between:
+- identity and access management systems,
+- execution engines and automation platforms,
+- logging and monitoring tools.
+
+It acts as a neutral, portable proof layer.
+
+ActProofs is best understood as:
+a receipt for authorizing an automated action.
+
+---
+
+PROJECT STATUS
+
+- Specification: Draft
+- Reference implementation: In progress
+- Target users: B2B, compliance, audit, AI governance teams
+
+ActProofs is developed as an open standard, designed for interoperability and long-term verifiability.
+
+---
+
+PHILOSOPHY
+
+No hype.  
+No blockchain.  
+No execution logic.  
+
+Just provable authorization of automated actions.
