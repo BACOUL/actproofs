@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>ActProofs — Provable Authorization for Automated Actions</title>
+  <title>ActProofs — Open Standard for Authorization Proof</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
   <!-- Meta -->
-  <meta name="description" content="ActProofs defines a neutral standard and API to produce cryptographic proof that an automated or AI-driven action was explicitly authorized."/>
+  <meta name="description" content="ActProofs is an open standard defining cryptographic proof of authorization for automated and AI-driven actions."/>
   <meta name="robots" content="index,follow"/>
 
   <!-- Font -->
@@ -43,7 +43,7 @@
       background:rgba(255,255,255,.96);
       backdrop-filter:blur(6px);
       border-bottom:1px solid var(--border);
-      padding:18px 28px;
+      padding:16px 24px;
       display:flex;
       justify-content:space-between;
       align-items:center;
@@ -56,61 +56,23 @@
       font-size:.85rem;
     }
 
-    nav.desktop a{
-      margin-left:32px;
+    nav a{
+      margin-left:28px;
       text-decoration:none;
       color:var(--muted);
       font-weight:500;
       font-size:.95rem;
     }
 
-    nav.desktop a:hover{color:var(--text)}
+    nav a:hover{color:var(--text)}
 
-    .burger{
-      display:none;
-      font-size:26px;
-      cursor:pointer;
-    }
-
-    /* MOBILE MENU */
-    .mobile-menu{
-      position:fixed;
-      inset:0;
-      background:#ffffff;
-      z-index:999;
-      display:none;
-      flex-direction:column;
-      padding:36px;
-    }
-
-    .mobile-menu.open{display:flex}
-
-    .mobile-menu .close{
-      font-size:28px;
-      align-self:flex-end;
-      cursor:pointer;
-    }
-
-    .mobile-menu a{
-      font-size:1.4rem;
-      font-weight:700;
-      margin:18px 0;
-      text-decoration:none;
-      color:var(--text);
-    }
-
-    /* MAIN */
     main{
-      max-width:980px;
+      max-width:960px;
       margin:0 auto;
-      padding:140px 24px 96px;
+      padding:140px 24px 120px;
     }
 
     /* HERO */
-    .hero{
-      margin-bottom:140px;
-    }
-
     .status{
       display:inline-block;
       font-size:.72rem;
@@ -125,11 +87,11 @@
     }
 
     h1{
-      font-size:3.6rem;
-      line-height:1.03;
+      font-size:3.4rem;
+      line-height:1.05;
       margin:0 0 32px;
       font-weight:800;
-      max-width:920px;
+      max-width:900px;
     }
 
     .hero p{
@@ -165,48 +127,34 @@
 
     /* SECTIONS */
     section{
-      margin-bottom:140px;
+      margin-top:140px;
     }
 
     section h2{
-      font-size:2.2rem;
+      font-size:2rem;
       font-weight:700;
-      margin-bottom:24px;
+      margin-bottom:20px;
     }
 
     section p{
-      max-width:820px;
+      max-width:780px;
       color:var(--muted);
-      font-size:1.08rem;
+      font-size:1.05rem;
     }
 
     .axiom{
-      font-size:1.35rem;
+      font-size:1.4rem;
       font-weight:700;
+      margin:64px 0;
       line-height:1.4;
-      margin:56px 0;
     }
 
     .rule{
       border-left:4px solid var(--border);
       padding-left:24px;
-      margin:28px 0;
+      margin:32px 0;
       font-weight:600;
     }
-
-    .split{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:72px;
-      margin-top:40px;
-    }
-
-    ul{
-      padding-left:18px;
-      color:var(--muted);
-    }
-
-    ul li{margin-bottom:14px}
 
     /* FOOTER */
     footer{
@@ -227,10 +175,7 @@
     footer a:hover{color:var(--text)}
 
     @media(max-width:900px){
-      nav.desktop{display:none}
-      .burger{display:block}
-      h1{font-size:2.5rem}
-      .split{grid-template-columns:1fr}
+      h1{font-size:2.4rem}
       main{padding-top:120px}
     }
   </style>
@@ -240,43 +185,35 @@
 
 <header>
   <div class="brand">ActProofs</div>
-  <nav class="desktop">
+  <nav>
     <a href="/standard">Standard</a>
     <a href="/regulations">Regulations</a>
     <a href="/api">API</a>
     <a href="/security">Security</a>
   </nav>
-  <div class="burger" onclick="openMenu()">☰</div>
 </header>
-
-<div class="mobile-menu" id="menu">
-  <div class="close" onclick="closeMenu()">✕</div>
-  <a href="/standard">Standard</a>
-  <a href="/regulations">Regulations</a>
-  <a href="/api">API</a>
-  <a href="/security">Security</a>
-  <a href="/legal">Legal</a>
-</div>
 
 <main>
 
   <!-- HERO -->
-  <div class="hero">
-    <div class="status">Authorization standard · Draft</div>
+  <section class="hero">
+    <div class="status">Open standard · Draft v0.1</div>
+
     <h1>
-      Automated systems act.<br>
       Authorization must be provable.
     </h1>
+
     <p>
-      ActProofs defines a neutral standard and API to produce
-      cryptographic proof that an automated or AI-driven action
-      was explicitly authorized, in a given context, at a given time.
+      ActProofs is an open standard defining a cryptographic,
+      portable, and independently verifiable proof that an
+      automated or AI-driven action was explicitly authorized.
     </p>
+
     <div class="cta">
-      <a class="cta-primary" href="/request-access">Request access</a>
-      <a class="cta-secondary" href="/standard">Read the standard</a>
+      <a class="cta-primary" href="/standard">Read the ActProofs Standard</a>
+      <a class="cta-secondary" href="/regulations">Regulatory context</a>
     </div>
-  </div>
+  </section>
 
   <!-- AXIOM -->
   <section>
@@ -287,64 +224,33 @@
     </div>
   </section>
 
-  <!-- PROBLEM -->
+  <!-- POSITION -->
   <section>
-    <h2>The responsibility gap</h2>
+    <h2>What ActProofs provides</h2>
     <p>
-      Automation already triggers actions with real-world impact.
-      Existing systems record events internally, but do not provide
-      independent, portable, verifiable proof of authorization.
+      ActProofs provides a neutral proof layer that sits between
+      identity systems and execution engines. It records
+      authorization decisions as cryptographic receipts that
+      can be archived, audited, and independently verified.
     </p>
+
     <div class="rule">
-      When an action is disputed, internal systems are insufficient.
+      ActProofs does not execute actions and does not manage identity.
     </div>
   </section>
 
-  <!-- SCOPE -->
+  <!-- CTA -->
   <section>
-    <h2>Scope</h2>
-    <div class="split">
-      <div>
-        <h3>What ActProofs does</h3>
-        <ul>
-          <li>Produces cryptographic authorization receipts</li>
-          <li>Links an action to an explicit authorization</li>
-          <li>Supports audit and accountability workflows</li>
-        </ul>
-      </div>
-      <div>
-        <h3>What ActProofs does not do</h3>
-        <ul>
-          <li>Does not execute, block, or validate actions</li>
-          <li>Does not manage identity or access control</li>
-          <li>Does not judge legality, intent, or outcomes</li>
-        </ul>
-      </div>
-    </div>
-    <div class="rule">
-      ActProofs is intentionally narrow by design.
-    </div>
-  </section>
-
-  <!-- VERIFICATION -->
-  <section>
-    <h2>Verification</h2>
+    <h2>The standard is the product</h2>
     <p>
-      ActProofs receipts are portable and verifiable without
-      trusting the issuing system. Verification rules are public
-      and can be implemented independently.
+      ActProofs is developed as an open specification designed
+      for interoperability, auditability, and long-term
+      verifiability.
     </p>
-  </section>
 
-  <!-- REGULATION -->
-  <section>
-    <h2>Designed for governance and regulation</h2>
-    <p>
-      ActProofs addresses emerging requirements around
-      accountability, traceability, and responsibility for
-      automated and AI-driven actions, without replacing
-      legal or organizational responsibility.
-    </p>
+    <div class="cta">
+      <a class="cta-primary" href="/standard">Read the specification</a>
+    </div>
   </section>
 
 </main>
@@ -359,11 +265,6 @@
     Stateless · Portable proof · Independently verifiable
   </div>
 </footer>
-
-<script>
-  function openMenu(){document.getElementById('menu').classList.add('open')}
-  function closeMenu(){document.getElementById('menu').classList.remove('open')}
-</script>
 
 </body>
 </html>
