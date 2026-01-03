@@ -1,0 +1,23 @@
+{
+  "version": "timeproofs-0.2",
+  "hash": {
+    "algorithm": "SHA-256",
+    "value": "bbbbee25f8ebb60fa512ad3e02460bd4cc7ec4a41850c5cc8636e67d99f0b3b2"
+  },
+  "timestamp": {
+    "issuedAt": "2025-12-01T21:50:43.538Z",
+    "issuer": "https://api.timeproofs.io",
+    "nonce": "8a64f51d5aa9eb6b14a213b3c26ef351"
+  },
+  "proof": {
+    "algo": "HMAC-SHA256+Ed25519",
+    "hmac": "43667bef3c30849223ef838ff6dd6878c0b4491555aee8266299fefe24700d84",
+    "signature": null,
+    "publicKey": null,
+    "keyId": "tp-v0-2-main"
+  },
+  "meta": {
+    "type": "test",
+    "purpose": "v0.2 demo"
+  }
+}
