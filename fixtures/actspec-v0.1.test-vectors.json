@@ -70,7 +70,7 @@
     {
       "id": "TV-04",
       "name": "Canonicalization Enforcement (Ordering)",
-      "description": "Input matches TV-01. However, the signature provided here was generated against a NON-CANONICAL string (where keys are not sorted). A compliant verifier MUST re-sort the keys, which leads to a different hash than what was signed. Verification MUST FAIL.",
+      "description": "Signature was generated against a non-canonical payload. Verifier MUST re-canonicalize and FAIL.",
       "expected_verify": false,
       "input": {
         "spec": "actspec-v0.1",
@@ -88,7 +88,7 @@
     {
       "id": "TV-05",
       "name": "Version Mismatch (Downgrade Protection)",
-      "description": "Signature is cryptographically valid for this payload, but the spec version is wrong. Logic MUST FAIL.",
+      "description": "Cryptographically valid signature but wrong spec version. Logic MUST FAIL.",
       "expected_verify": false,
       "input": {
         "spec": "actspec-v0.0",
