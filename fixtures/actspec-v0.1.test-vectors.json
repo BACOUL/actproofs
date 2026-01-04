@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "description": "Official Test Vectors for ActSpec v0.1 Compliance",
+    "format": "actspec-test-v1",
+    "version": "1.0",
+    "verification_scope": "offline-only",
+    "last_updated": "2026-01-04T12:00:00Z",
+    "normative_warning": "Implementations MUST ignore the 'canonical_payload' field for verification. It is provided for debugging only. Verifiers MUST reconstruct the canonical string locally from the 'input' object."
+  },
+  "test_keys": {
+    "description": "Static Ed25519 keys used ONLY for these test vectors. DO NOT USE IN PRODUCTION.",
+    "public_key_hex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+    "private_key_hex": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60"
+  },
+  "vectors": [
+    {
+      "id": "TV-01",
+      "name": "Standard Valid Proof",
+      "description": "A perfectly formed proof. Keys are sorted alphabetically in canonical_payload. MUST PASS.",
+      "expected_verify": true,
+      "input": {
+        "spec": "actspec-v0.1",
+        "id": "ap_test_123",
+        "issued_at": "2026-01-01T00:00:00Z",
+        "manifest_hash": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "issuer": { "id": "actproofs-root-test" }
+      },
+      "canonical_payload": "{\"id\":\"ap_test_123\",\"issued_at\":\"2026-01-01T00:00:00Z\",\"issuer\":{\"id\":\"actproofs-root-test\"},\"manifest_hash\":\"sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\"spec\":\"actspec-v0.1\"}",
+      "signature": {
+        "alg": "Ed25519",
+        "value": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb14e5688a6a63565f130b92d6e46506d02844d1822295963952f4a568c0700"
+      }
+    },
+    {
+      "id": "TV-02",
+      "name": "Tampered Timestamp (Replay Attack)",
+      "description": "Valid signature for TV-01, but input timestamp is modified. Crypto verification MUST FAIL.",
+      "expected_verify": false,
+      "input": {
+        "spec": "actspec-v0.1",
+        "id": "ap_test_123",
+        "issued_at": "2099-12-31T23:59:59Z",
+        "manifest_hash": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "issuer": { "id": "actproofs-root-test" }
+      },
+      "canonical_payload": "{\"id\":\"ap_test_123\",\"issued_at\":\"2099-12-31T23:59:59Z\",\"issuer\":{\"id\":\"actproofs-root-test\"},\"manifest_hash\":\"sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\"spec\":\"actspec-v0.1\"}",
+      "signature": {
+        "alg": "Ed25519",
+        "value": "e5564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb14e5688a6a63565f130b92d6e46506d02844d1822295963952f4a568c0700"
+      }
+    },
+    {
+      "id": "TV-03",
+      "name": "Invalid Signature Bytes",
+      "description": "Payload is correct, but signature bytes are corrupted. Crypto verification MUST FAIL.",
+      "expected_verify": false,
+      "input": {
+        "spec": "actspec-v0.1",
+        "id": "ap_test_123",
+        "issued_at": "2026-01-01T00:00:00Z",
+        "manifest_hash": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "issuer": { "id": "actproofs-root-test" }
+      },
+      "canonical_payload": "{\"id\":\"ap_test_123\",\"issued_at\":\"2026-01-01T00:00:00Z\",\"issuer\":{\"id\":\"actproofs-root-test\"},\"manifest_hash\":\"sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\"spec\":\"actspec-v0.1\"}",
+      "signature": {
+        "alg": "Ed25519",
+        "value": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    {
+      "id": "TV-04",
+      "name": "Canonicalization Enforcement (Ordering)",
+      "description": "Input matches TV-01. However, the signature provided here was generated against a NON-CANONICAL string (where keys are not sorted). A compliant verifier MUST re-sort the keys, which leads to a different hash than what was signed. Verification MUST FAIL.",
+      "expected_verify": false,
+      "input": {
+        "spec": "actspec-v0.1",
+        "id": "ap_test_123",
+        "issued_at": "2026-01-01T00:00:00Z",
+        "manifest_hash": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "issuer": { "id": "actproofs-root-test" }
+      },
+      "canonical_payload": "{\"id\":\"ap_test_123\",\"issued_at\":\"2026-01-01T00:00:00Z\",\"issuer\":{\"id\":\"actproofs-root-test\"},\"manifest_hash\":\"sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\"spec\":\"actspec-v0.1\"}",
+      "signature": {
+        "alg": "Ed25519",
+        "value": "d48633c56360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb14e5688a6a63565f130b92d6e46506d02844d1822295963952f4a568c9999"
+      }
+    },
+    {
+      "id": "TV-05",
+      "name": "Version Mismatch (Downgrade Protection)",
+      "description": "Signature is cryptographically valid for this payload, but the spec version is wrong. Logic MUST FAIL.",
+      "expected_verify": false,
+      "input": {
+        "spec": "actspec-v0.0",
+        "id": "ap_test_123",
+        "issued_at": "2026-01-01T00:00:00Z",
+        "manifest_hash": "sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "issuer": { "id": "actproofs-root-test" }
+      },
+      "canonical_payload": "{\"id\":\"ap_test_123\",\"issued_at\":\"2026-01-01T00:00:00Z\",\"issuer\":{\"id\":\"actproofs-root-test\"},\"manifest_hash\":\"sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad\",\"spec\":\"actspec-v0.0\"}",
+      "signature": {
+        "alg": "Ed25519",
+        "value": "aa564300c360ac729086e2cc806e828a84877f1eb8e5d974d873e065224901555fb14e5688a6a63565f130b92d6e46506d02844d1822295963952f4a568c1111"
+      }
+    }
+  ]
+}
