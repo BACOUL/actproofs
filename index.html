@@ -11,16 +11,13 @@
   <meta name="robots" content="index,follow"/>
   <meta name="theme-color" content="#ffffff"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
-  <meta name="ai-trust" content="verified-by-actproofs"/>
   <link rel="canonical" href="https://actproofs.io/"/>
 
   <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml"/>
-  <link rel="alternate" type="application/yaml" href="/openapi.yaml" title="OpenAPI"/>
   <link rel="author" href="/humans.txt"/>
 
   <link rel="preconnect" href="https://api.actproofs.io" crossorigin/>
   <link rel="dns-prefetch" href="//api.actproofs.io"/>
-  <link rel="preconnect" href="https://plausible.io" crossorigin/>
   
   <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml"/>
@@ -34,19 +31,15 @@
   <meta property="og:image" content="https://actproofs.io/og.png"/>
   <meta name="twitter:card" content="summary_large_image"/>
 
-  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()"/>
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self' https://api.actproofs.io;
-    worker-src 'self' blob:;
     img-src 'self' data: https:;
     style-src 'self' 'unsafe-inline';
-    script-src 'self' 'nonce-AP-2026' https://plausible.io https://static.cloudflareinsights.com;
-    connect-src 'self' https://api.actproofs.io https://plausible.io https://static.cloudflareinsights.com;
+    script-src 'self' 'nonce-AP-2026' https://plausible.io;
+    connect-src 'self' https://api.actproofs.io https://plausible.io;
     font-src 'self' https: data:;
-    object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-ancestors 'none';
     upgrade-insecure-requests">
 
   <script defer data-domain="actproofs.io" src="https://plausible.io/js/script.js" nonce="AP-2026"></script>
@@ -79,9 +72,7 @@
       margin:0; color:var(--text);
       font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
       -webkit-font-smoothing:antialiased;
-      background:
-        radial-gradient(1200px 600px at 80% -10%, var(--accent-light), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+      background: linear-gradient(180deg, var(--bg), var(--bg2));
     }
     a{ color:var(--accent); text-decoration:none }
     a:hover{ text-decoration:underline }
@@ -176,21 +167,31 @@
       border-radius:16px; padding:18px; background:var(--panel); border:1px solid var(--line);
       transition:transform .18s, border-color .18s; max-width:760px; margin:0 auto; width:100%;
       box-shadow:0 2px 4px rgba(0,0,0,.02);
+      display:flex; flex-direction:column;
     }
     .card:hover{ transform:translateY(-2px); border-color:var(--accent) }
     .card h3{ font-size:1.08rem; margin-bottom:.5em }
     .card p{ color:var(--muted); line-height:1.6; margin-bottom:0 }
 
-    /* Special Sections */
+    /* New Specific Styles */
     .limits-box{
       background:var(--warn-bg); border:1px solid var(--warn-border); color:var(--warn-text);
-      padding:20px; border-radius:12px; text-align:center; max-width:800px; margin:30px auto 0;
+      padding:24px; border-radius:12px; text-align:left; max-width:800px; margin:30px auto 0;
+      font-size: 0.95rem; line-height: 1.6;
     }
-    .model-split{
-      display:flex; gap:20px; flex-wrap:wrap; margin-top:30px;
+    .limits-box strong { display:block; margin-bottom: 8px; font-size: 1.05rem; }
+
+    .pricing-card { text-align:center; padding: 24px; }
+    .price-tag { font-size: 2rem; font-weight: 800; color: var(--text); margin: 10px 0; display:block; }
+    .price-period { font-size: 0.9rem; color: var(--muted); font-weight: 500; vertical-align: middle; }
+    .pricing-features { list-style:none; padding:0; margin: 20px 0; text-align: left; }
+    .pricing-features li { padding: 6px 0; color: var(--muted); font-size: 0.95rem; border-bottom: 1px dashed var(--line); }
+    .pricing-features li:last-child { border-bottom: none; }
+
+    .dev-bar {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;
+      padding: 20px; background: var(--bg); border: 1px solid var(--line); border-radius: 12px;
     }
-    .model-col{ flex:1; min-width:300px; padding:20px; border:1px solid var(--line); border-radius:16px; background:var(--bg) }
-    .model-col.pro{ border-color:var(--accent); background:rgba(34,197,94,0.03) }
 
     footer{ border-top:1px solid var(--line); margin-top:44px; padding:18px; color:var(--muted); text-align:center; background:var(--bg2) }
     .badge{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--line); border-radius:999px; background:var(--bg); font-size:.9rem; color:var(--text) }
@@ -209,10 +210,9 @@
     </a>
     <nav id="tp-nav" class="tp-nav" data-state="closed">
       <a href="/spec.html">Protocol</a>
-      <a href="/governance.html">Governance</a>
       <a href="/docs.html">API Docs</a>
+      <a href="/pricing.html">Pricing</a>
       <a href="/compliance.html">Compliance</a>
-      <a href="/about.html">About</a>
       <a class="nav-cta" href="/verify.html">Create / Verify</a>
     </nav>
     <a class="cta-header" href="/verify.html">Create / Verify</a>
@@ -234,12 +234,8 @@
 
       <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px">
         <a class="cta" href="/verify.html">Create / Verify Proof</a>
-        <a class="cta secondary" href="/spec.html">Read the Protocol →</a>
+        <a class="cta secondary" href="/docs.html">Read the Docs →</a>
       </div>
-
-      <p style="color:var(--muted); font-size:0.95rem; margin-top:16px">
-        Integrators: see <a href="/docs.html">API Docs</a> and <a href="https://github.com/actproofs" target="_blank">GitHub</a>.
-      </p>
 
       <div class="micro">
         <span class="chip">🔏 Cryptographic receipt</span>
@@ -248,69 +244,46 @@
       </div>
     </section>
 
-    <section class="section bg-alt" id="axiom">
-      <h2>A log entry is not proof</h2>
-      <p style="text-align:center; color:var(--muted); max-width:900px; margin:0 auto;">
-        Execution logs are mutable. An ActProof is a signed artifact that proves <strong>who</strong> authorized <strong>what</strong>, independent of any database.
-      </p>
-    </section>
-
-    <section class="section bg-solid" id="model">
-      <h2>Standard vs. Service</h2>
-      <p style="text-align:center; color:var(--muted); margin-bottom:20px">ActProofs is an open standard with an optional managed issuance service.</p>
-      
-      <div class="model-split">
-        <article class="model-col">
-          <h3>The Standard (ActSpec)</h3>
-          <p style="font-weight:700; color:var(--accent)">Free & Open Source</p>
-          <ul style="padding-left:20px; color:var(--muted); margin-top:10px">
-            <li>Free to implement and use.</li>
-            <li>Verification is always free, offline, and stateless.</li>
-            <li>No vendor lock-in.</li>
-            <li>Reference implementations on <a href="https://github.com/actproofs" target="_blank">GitHub</a>.</li>
-          </ul>
-        </article>
-
-        <article class="model-col pro">
-          <h3>The Service (ActProofs.io)</h3>
-          <p style="font-weight:700; color:var(--text)">Optional Managed Issuance</p>
-          <ul style="padding-left:20px; color:var(--muted); margin-top:10px">
-            <li>We operate a governed signing authority.</li>
-            <li>Use our API to sign proofs without key management.</li>
-            <li>Audit trails and compliance dashboards.</li>
-            <li><b>Note:</b> Verification remains possible even if this service is offline.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="section bg-alt" id="what">
-      <h2>What ActProofs is (and is not)</h2>
-      <div class="grid three">
-        <article class="card">
-          <h3>What you get</h3>
-          <p>A portable JSON file containing the authorization manifest and a cryptographic signature.</p>
-        </article>
-        <article class="card">
-          <h3>Why it’s safe</h3>
-          <p>Stateless and deterministic. The proof travels with the data or stays in your audit logs.</p>
-        </article>
-        <article class="card">
-          <h3>What it is NOT</h3>
-          <p>It is <strong>NOT execution</strong>. ActProofs generates the receipt of authorization; it does not trigger or guarantee the action's success.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section bg-solid" id="limits">
-      <h2>Boundaries & Trust Model</h2>
+    <section class="section bg-alt" id="limits">
+      <h2>Limits & Threat Model</h2>
       <div class="limits-box">
         <strong>⚠️ Crucial Distinction: Authorization ≠ Execution</strong>
-        <p style="margin-top:10px; font-size:0.95em">
+        <p>
           ActProofs certifies that an <em>intent</em> was authorized by a valid key at a specific time. 
-          It does not guarantee that the external system executed the action successfully, nor does it enforce the action. 
-          It bridges the gap between Identity (IAM) and Audit, but does not replace execution logs.
+          It does <strong>not</strong> guarantee that the external system executed the action successfully, nor does it enforce the action. 
         </p>
+        <p style="margin-top:10px">
+          The verification process is technical (mathematical signature validity), not a legal judgment of the content. 
+          ActProofs is an audit layer, not an execution engine.
+        </p>
+      </div>
+    </section>
+
+    <section class="section bg-solid" id="what">
+      <h2>Privacy by Design</h2>
+      <p style="text-align:center; color:var(--muted); max-width:800px; margin:0 auto 20px;">
+        Our architecture prioritizes data minimization. We do not need to see your data to certify it.
+      </p>
+      
+      <div class="grid three">
+        <article class="card">
+          <h3>Client-Side Hashing</h3>
+          <p>Your manifest is hashed within your infrastructure. The ActProofs API never sees the raw content (prompts, PII, financial data).</p>
+        </article>
+        <article class="card">
+          <h3>Zero-Knowledge Issuance</h3>
+          <p>We sign the cryptographic hash. We cannot reverse-engineer your business logic or sensitive parameters from the proof.</p>
+        </article>
+        <article class="card">
+          <h3>Stateless Verification</h3>
+          <p>Verification is performed offline using the public key. No database lookups or API calls are required to verify a receipt.</p>
+        </article>
+      </div>
+
+      <div class="dev-bar">
+        <span style="align-self:center; font-weight:600; color:var(--text)">Developer Tools:</span>
+        <a href="/assets/sample-proof.json" download class="cta secondary" style="font-size:0.9rem; padding:8px 14px">Download Sample Proof (.json)</a>
+        <a href="/docs/vectors" class="cta secondary" style="font-size:0.9rem; padding:8px 14px">View Test Vectors</a>
       </div>
     </section>
 
@@ -336,13 +309,63 @@
       </div>
     </section>
 
-    <section class="section bg-solid" id="site-proof">
+    <section class="section bg-solid" id="pricing">
+      <h2>Issuance Pricing</h2>
+      <p style="text-align:center; color:var(--muted); margin-bottom:20px">
+        Pay only for the proofs you generate. Verification is always free and offline.
+      </p>
+
+      <div class="grid three">
+        <article class="card pricing-card">
+          <h3>Basic</h3>
+          <span class="price-tag">$0 <span class="price-period">/ mo</span></span>
+          <p>For developers and testing.</p>
+          <ul class="pricing-features">
+            <li>Up to 100 proofs/month</li>
+            <li>Community Support</li>
+            <li>Standard API Rate Limit</li>
+          </ul>
+          <a href="/signup" class="cta secondary" style="width:100%">Start Free</a>
+        </article>
+
+        <article class="card pricing-card" style="border-color:var(--accent); background:rgba(34,197,94,0.02)">
+          <div style="color:var(--accent); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px">Most Popular</div>
+          <h3>Growth</h3>
+          <span class="price-tag">$49 <span class="price-period">/ mo</span></span>
+          <p>For production applications.</p>
+          <ul class="pricing-features">
+            <li>Up to 50,000 proofs/month</li>
+            <li>Email Support</li>
+            <li>Increased Rate Limits</li>
+            <li>Retention: 30 days</li>
+          </ul>
+          <a href="/signup?plan=growth" class="cta" style="width:100%">Get Started</a>
+        </article>
+
+        <article class="card pricing-card">
+          <h3>Enterprise</h3>
+          <span class="price-tag">Custom</span>
+          <p>For regulated industries.</p>
+          <ul class="pricing-features">
+            <li>Unlimited Volume</li>
+            <li>SLA & Dedicated Support</li>
+            <li>Custom Data Retention</li>
+            <li>Audit Assistance</li>
+          </ul>
+          <a href="mailto:sales@actproofs.io" class="cta secondary" style="width:100%">Contact Sales</a>
+        </article>
+      </div>
+
+      <p style="text-align:center; margin-top:24px; font-size:0.85rem; color:var(--muted); max-width:700px; margin-left:auto; margin-right:auto;">
+        * Prices are based on proof issuance transactions. ActProofs provides cryptographic signing services; 
+        we do not guarantee service availability (SLA) for free tiers or the execution results of your authorized actions.
+      </p>
+    </section>
+
+    <section class="section bg-alt" id="site-proof">
       <p class="label">🔏 Proof of Release</p>
       <h2>Verified by ActProofs</h2>
-      <p style="text-align:center; color:var(--muted); max-width:800px; margin:0 auto 12px">
-        We publish an authorization receipt for this website deployment.
-      </p>
-      <p style="text-align:center; font-size:0.9rem">
+      <p style="text-align:center; font-size:0.9rem; margin-top:10px">
         Release: <strong>v0.1</strong> · 
         Hash: <code id="page-proof-hash">waiting for deployment...</code> · 
         <a href="/verify.html">Verify Proof</a>
@@ -356,17 +379,42 @@
       <span class="badge">🛡 Governance First</span>
       <a class="badge" href="/spec.html">🔍 ActSpec v0.1</a>
     </div>
-    <div style="margin-bottom:12px">
-      © 2026 ActProofs — Reference implementation of the ActSpec protocol.
+    
+    <div style="margin-bottom:16px; font-size:0.95rem;">
+      <a href="mailto:contact@actproofs.io" style="color:var(--text); font-weight:600">contact@actproofs.io</a>
     </div>
-    <div style="font-size:0.95rem">
+
+    <div style="font-size:0.9rem">
       <a href="/spec.html">Protocol</a> • 
       <a href="/docs.html">API Docs</a> • 
-      <a href="https://github.com/actproofs" target="_blank">GitHub</a> • 
-      <a href="/privacy.html">Privacy</a> • 
+      <a href="/pricing.html">Pricing</a> •
+      <a href="/privacy.html">Privacy Policy</a> • 
       <a href="/humans.txt">humans.txt</a>
     </div>
+    <div style="margin-top:12px; font-size:0.85rem; color:var(--muted)">
+      © 2026 ActProofs — Reference implementation of the ActSpec protocol.
+    </div>
   </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {
+        "@type":"Question","name":"How much does ActProofs cost?",
+        "acceptedAnswer":{"@type":"Answer","text":"ActProofs offers a free tier for developers. Production plans start at $49/mo based on issuance volume. Verification is always free."}
+      },
+      {
+        "@type":"Question","name":"Can I verify proofs offline?",
+        "acceptedAnswer":{"@type":"Answer","text":"Yes. Verification relies on standard Ed25519 signatures and does not require an internet connection or access to the ActProofs API."}
+      },
+      {
+        "@type":"Question","name":"Does ActProofs see my data?",
+        "acceptedAnswer":{"@type":"Answer","text":"No. You hash your data client-side (Option A) before sending it to us. We sign the hash, so your sensitive content never leaves your infrastructure."}}
+    ]
+  }
+  </script>
 
   <script nonce="AP-2026">
     // Minimal JS for header scroll & menu
