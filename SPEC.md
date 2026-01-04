@@ -43,14 +43,14 @@ ActSpec certifies that an *authorization existed*. It does not assert whether th
 
 ---
 
-## 3. High-Level Protocol Flow
+## 3. High-Level Protocol Flow (Blind Notary)
 
-1.  The client defines an **Authorization Manifest** locally.
-2.  The client **canonicalizes** the manifest.
-3.  The client **hashes** the canonicalized manifest using SHA-256.
-4.  The client sends **only the hash** to the ActProofs Issuer.
-5.  The Issuer **timestamps** and **signs** a receipt.
-6.  The **ActProof** is returned and can be verified offline.
+1.  **Local Definition:** The client defines an **Authorization Manifest** locally.
+2.  **Local Canonicalization:** The client canonicalizes the manifest (RFC 8785).
+3.  **Local Hashing:** The client hashes the canonical string using SHA-256.
+4.  **Blind Request:** The client sends **only the hash** to the ActProofs Issuer.
+5.  **Issuance:** The Issuer timestamps, canonicalizes the receipt payload, and signs it.
+6.  **Verification:** The returned **ActProof** is stored by the client and can be verified offline.
 
 **Security Note:** At no point does the Issuer receive sensitive data, parameters, prompts, or PII.
 
@@ -58,7 +58,7 @@ ActSpec certifies that an *authorization existed*. It does not assert whether th
 
 ## 4. Data Structures
 
-### 4.1. Authorization Manifest
+### 4.1. Authorization Manifest (Client-Side)
 The Authorization Manifest is client-owned and never transmitted in clear. It is cryptographically bound to the real action via hashing.
 
 It defines:
@@ -67,14 +67,14 @@ It defines:
 * **In which** context
 * **Under which** constraints
 
-### 4.2. ActProof Receipt
+### 4.2. ActProof Receipt (The Signed Object)
 The Issuer returns a signed ActProof containing:
-* Specification version
-* Unique proof ID
-* Timestamp of issuance
-* Manifest hash
-* Issuer identifier
-* Cryptographic signature
+* `spec`: Specification version (`actspec-v0.1`)
+* `id`: Unique proof ID (UUID)
+* `issued_at`: ISO 8601 Timestamp
+* `manifest_hash`: The SHA-256 hash provided by the client
+* `issuer`: Issuer Identifier
+* `signature`: Cryptographic signature
 
 The ActProof is a portable file that can be stored, shared, audited, and verified independently.
 
@@ -82,12 +82,12 @@ The ActProof is a portable file that can be stored, shared, audited, and verifie
 
 ## 5. Cryptographic Design
 
-* **Signature Algorithm:** Ed25519
+* **Signature Algorithm:** Ed25519 (Edwards-curve Digital Signature Algorithm)
 * **Hash Algorithm:** SHA-256
-* **Canonicalization:** RFC 8785 (JSON Canonicalization Scheme)
+* **Canonicalization:** RFC 8785 (JSON Canonicalization Scheme - JCS)
 
-### 5.1. Signature Coverage
-The signature MUST cover the canonicalized payload containing:
+### 5.1. Signature Coverage (Normative)
+The signature MUST cover the canonicalized payload string containing:
 * `spec`
 * `id`
 * `issued_at`
@@ -102,12 +102,13 @@ The signature MUST cover the canonicalized payload containing:
 
 A verifier MUST perform the following steps. Failure at any step invalidates the proof.
 
-1.  **Enforce** the spec version.
-2.  **Validate** required fields.
+1.  **Enforce** the spec version (`actspec-v0.1`).
+2.  **Validate** structural integrity (presence of required fields).
 3.  **Separate** payload from signature.
-4.  **Canonicalize** the payload using RFC 8785.
+4.  **Canonicalize** the payload using **RFC 8785**.
+    * *Note:* Implementations MUST NOT use generic `JSON.stringify` unless it is strictly JCS-compliant.
 5.  **Verify** the Ed25519 signature using the Issuer's public key.
-6.  **(Optional)** Check revocation status via the Issuer.
+6.  **(Optional)** Check revocation status via the Issuer's API.
 
 ### 6.1. Stateless Verification
 ActSpec supports full offline verification. Only the ActProof file and the Issuer public key are required.
@@ -119,7 +120,7 @@ ActSpec supports full offline verification. Only the ActProof file and the Issue
 * **Cryptographic Validity:** Immutable. The math always holds.
 * **Operational Trust:** Mutable.
 
-A revoked proof remains mathematically valid but is flagged as **operationally untrusted**.
+A revoked proof remains mathematically valid but is flagged as **operationally untrusted** (e.g., due to key compromise or administrative cancellation).
 
 ---
 
@@ -129,12 +130,12 @@ A revoked proof remains mathematically valid but is flagged as **operationally u
 * Define authorization intent.
 * Protect sensitive data.
 * Store the Authorization Manifest.
-* Map the manifest hash to the real-world action.
+* Map the signed `manifest_hash` to the real-world action.
 
 ### 8.2. Issuer Responsibilities
 * Timestamp integrity.
 * Signature correctness.
-* Tenant authentication.
+* Tenant authentication (API Key).
 * Public key governance.
 
 **ActProofs acts as a blind notary.**
@@ -151,12 +152,14 @@ ActSpec is designed to support:
 
 ---
 
-## 10. Testing and Conformance
+## 10. Testing and Conformance (Normative)
 
-An implementation is **ActSpec v0.1 compliant** if it:
-* Passes all official test vectors.
-* Matches canonical payloads byte-for-byte.
-* Rejects tampered timestamps and invalid signatures.
+To be considered "ActSpec v0.1 Compliant", an implementation (verifier or issuer) MUST:
+
+1.  **Pass Test Vectors:** Successfully process all vectors defined in the official `fixtures/vectors.json`.
+    * Positive vectors MUST return `valid=true`.
+    * Negative vectors (tampered timestamp, bad signature, bad ordering) MUST return `valid=false`.
+2.  **Canonicalization Check:** Verify that the locally generated canonical string matches the `canonical_payload` field in the test vectors exactly (byte-for-byte).
 
 ---
 
