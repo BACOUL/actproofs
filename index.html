@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <meta name="color-scheme" content="dark light"/>
+  <meta name="color-scheme" content="light"/>
   <title>ActProofs — Open Standard for Proof of Authorization</title>
   <meta name="application-name" content="ActProofs"/>
   <meta name="description" content="Generate verifiable proof files for automated and AI actions. Cryptographic, portable, and independently verifiable authorization receipts."/>
   <meta name="keywords" content="proof of authorization, AI governance, automated actions, cryptographic audit, actproof, verification, compliance, stateless API"/>
   <meta name="robots" content="index,follow"/>
-  <meta name="theme-color" content="#0b1020"/>
+  <meta name="theme-color" content="#ffffff"/>
   <meta name="referrer" content="strict-origin-when-cross-origin"/>
   <meta name="ai-trust" content="verified-by-actproofs"/>
   <link rel="canonical" href="https://actproofs.io/"/>
@@ -90,10 +90,19 @@ upgrade-insecure-requests">
 
   <style>
     :root{
-      --bg:#0b1020; --bg2:#0b1226; --panel:#0f172a; --line:#1e293b;
-      --text:#f8fafc; --muted:#94a3b8; --accent:#22d3ee;
-      --ok:#34d399; --warn:#f59e0b ; --err:#ef4444;
-      --ring:0 0 0 1px #1e293b, 0 10px 40px rgba(34,211,238,.14);
+      /* Light Theme Palette (Green Accent) */
+      --bg:#ffffff; 
+      --bg2:#f8fafc; 
+      --panel:#ffffff; 
+      --line:#e2e8f0;
+      --text:#0f172a; 
+      --muted:#64748b; 
+      --accent:#22c55e; /* Green accent */
+      --accent-light:rgba(34,197,94,0.1);
+      --ok:#16a34a; 
+      --warn:#d97706; 
+      --err:#dc2626;
+      --ring:0 0 0 1px var(--line), 0 10px 40px rgba(0,0,0,.05);
       --e:cubic-bezier(.22,.61,.36,1)
     }
     *{ box-sizing:border-box }
@@ -110,8 +119,8 @@ upgrade-insecure-requests">
       font:16px/1.65 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
       background:
-        radial-gradient(1200px 600px at 80% -10%, rgba(34,211,238,.06), transparent 60%),
-        conic-gradient(from 220deg at 10% -20%, rgba(34,211,238,.04), transparent 30%),
+        radial-gradient(1200px 600px at 80% -10%, var(--accent-light), transparent 60%),
+        conic-gradient(from 220deg at 10% -20%, var(--accent-light), transparent 30%),
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
     a{ color:var(--accent); text-decoration:none }
@@ -123,15 +132,17 @@ upgrade-insecure-requests">
     .skip{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
     .skip:focus{
       position:fixed; left:12px; top:12px; width:auto; height:auto; padding:8px 12px;
-      background:#0d2330; color:#bff1ff; border:1px solid #214a57; border-radius:8px; z-index:2000
+      background:var(--bg); color:var(--accent); border:1px solid var(--accent); border-radius:8px; z-index:2000
     }
 
+    /* Header */
     .tp-header{
       position:fixed; inset:0 0 auto 0; height:64px; z-index:1000;
-      background:rgba(11,16,32,.55); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
-      display:flex; align-items:center; gap:12px; padding:0 16px; transition:background .25s var(--e)
+      background:rgba(255,255,255,.85); backdrop-filter:blur(10px); border-bottom:1px solid var(--line);
+      display:flex; align-items:center; gap:12px; padding:0 16px; transition:background .25s var(--e);
+      color: var(--text);
     }
-    .tp-header.scrolled{ background:rgba(11,16,32,.88) }
+    .tp-header.scrolled{ background:rgba(255,255,255,.95); box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
     .tp-brand{
       display:flex; align-items:center; gap:10px; color:var(--text);
       font-weight:900; letter-spacing:.2px; font-size:1.08rem; text-decoration:none; margin-right:auto
@@ -147,18 +158,18 @@ upgrade-insecure-requests">
       text-underline-offset:3px;
     }
     .tp-nav a:hover{ color:var(--accent); text-decoration:underline }
-    .tp-nav a[aria-current="page"]{ color:#9beefb }
+    .tp-nav a[aria-current="page"]{ color:var(--accent) }
 
     .cta-header{
       display:none; align-items:center; justify-content:center; height:40px; padding:0 14px;
-      border-radius:10px; background:var(--accent); color:#06202a; font-weight:800; box-shadow:0 6px 24px rgba(34,211,238,.25)
+      border-radius:10px; background:var(--accent); color:#ffffff; font-weight:800; box-shadow:0 4px 12px var(--accent-light);
     }
-    .cta-header:hover{ filter:brightness(1.05) }
+    .cta-header:hover{ filter:brightness(1.05); text-decoration: none; }
 
     .tp-burger{
       display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px;
-      border:1px solid var(--line); border-radius:12px; background:#0c1a2e; color:#fff;
-      cursor:pointer; box-shadow:var(--ring)
+      border:1px solid var(--line); border-radius:12px; background:var(--bg); color:var(--text);
+      cursor:pointer;
     }
     .tp-burger span{ font-size:20px; line-height:1 }
 
@@ -172,50 +183,50 @@ upgrade-insecure-requests">
     @media (max-width:899px){
       .tp-brand img{ height:34px; width:34px }
       .tp-nav{
-        position:fixed; top:64px; left:0; right:0; background:#0c1424; border-top:1px solid var(--line);
-        display:flex; flex-direction:column; gap:10px; padding:14px 16px; box-shadow:0 16px 40px rgba(0,0,0,.45);
+        position:fixed; top:64px; left:0; right:0; background:var(--bg); border-top:1px solid var(--line);
+        display:flex; flex-direction:column; gap:10px; padding:14px 16px; box-shadow:0 16px 40px rgba(0,0,0,.1);
         transform:translateY(-10px); opacity:0; pointer-events:none; transition:opacity .2s ease, transform .2s ease
       }
       .tp-nav a{ margin:4px 0 }
       .tp-nav[data-state="open"]{ transform:translateY(0); opacity:1; pointer-events:auto }
       .nav-cta{
         display:block; margin-top:6px; padding:12px; text-align:center; border-radius:12px;
-        background:var(--accent); color:#06202a; font-weight:800
+        background:var(--accent); color:#ffffff; font-weight:800; text-decoration: none;
       }
     }
 
     .wrap{ max-width:1200px; margin:0 auto; padding:0 16px }
 
+    /* Index sections (Light mode adaptations) */
     .hero{
       min-height:calc(100svh - 64px); padding-top:92px; padding-bottom:34px;
       display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
       position:relative; isolation:isolate
     }
     .label{
-      display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border:1px solid #214a57;
-      background:#0d2330; color:#bff1ff; border-radius:999px; font-size:.85rem; margin-bottom:12px; box-shadow:var(--ring)
+      display:inline-flex; gap:8px; align-items:center; padding:6px 12px; border:1px solid var(--line);
+      background:var(--bg2); color:var(--muted); border-radius:999px; font-size:.85rem; margin-bottom:12px; font-weight: 600;
     }
     .title{
       font-size:clamp(2.2rem, 6.2vw, 3.4rem); line-height:1.06; margin:.2em auto .3em; font-weight:900; max-width:1000px;
-      background:linear-gradient(90deg,#e6fbff,#9beefb 35%,#e6fbff);
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      text-shadow:0 2px 40px rgba(34,211,238,.10)
+      color:var(--text); letter-spacing: -0.02em;
     }
     .subtitle{ color:var(--muted); max-width:920px; margin:0 auto 12px; line-height:1.7; font-size:clamp(1rem, 2.8vw, 1.15rem); padding:0 6px }
-    .positioning{ color:#9fb3c9; max-width:860px; margin:0 auto 8px; }
+    .positioning{ color:var(--muted); max-width:860px; margin:0 auto 8px; }
     .cta-wrap{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:12px }
     .cta{
-      background:var(--accent); color:#06202a; border:none; padding:14px 18px; border-radius:12px; font-weight:700;
-      box-shadow:0 8px 30px rgba(34,211,238,.18); transition:transform .18s var(--e), box-shadow .18s
+      background:var(--accent); color:#ffffff; border:none; padding:14px 18px; border-radius:12px; font-weight:700;
+      box-shadow:0 8px 20px var(--accent-light); transition:transform .18s var(--e), box-shadow .18s
     }
-    .cta.secondary{ background:#111d33; color:#e2f6ff; border:1px solid #1e2a3e; font-weight:600 }
-    .cta:hover{ transform:translateY(-2px); box-shadow:0 12px 38px rgba(34,211,238,.25) }
+    .cta.secondary{ background:var(--bg); color:var(--text); border:1px solid var(--line); font-weight:600; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+    .cta:hover{ transform:translateY(-2px); text-decoration: none; box-shadow:0 12px 25px var(--accent-light) }
+    .cta.secondary:hover{ box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
 
-    .micro{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; color:#9fb3c9; margin:10px 0 0 }
-    .micro .chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border:1px solid #214a57; background:#0d2330; border-radius:999px; font-size:.82rem }
+    .micro{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; color:var(--muted); margin:10px 0 0 }
+    .micro .chip{ display:inline-flex; align-items:center; gap:6px; padding:4px 10px; border:1px solid var(--line); background:var(--bg2); border-radius:999px; font-size:.82rem; font-weight: 500; }
 
     .section{ padding:44px 0; position:relative }
-    .section h2{ color:#b9e7f5; font-size:clamp(1.3rem, 2.6vw, 1.6rem); margin:0 0 14px; text-align:center }
+    .section h2{ color:var(--text); font-size:clamp(1.3rem, 2.6vw, 1.6rem); margin:0 0 14px; text-align:center; font-weight: 800; }
     .grid{ display:grid; gap:16px }
     .grid.three{ grid-template-columns:1fr }
     @media(min-width:900px){ .grid.three{ grid-template-columns:repeat(3,1fr) } }
@@ -223,29 +234,23 @@ upgrade-insecure-requests">
     .grid.two{ grid-template-columns:1fr }
     @media(min-width:900px){ .grid.two{ grid-template-columns:repeat(2,1fr) } }
 
-    .section.bg-alt{ background:linear-gradient(180deg,#0b1020,#0c1424); border-top:1px solid #121a2e; border-bottom:1px solid #121a2e }
-    .section.bg-solid{ background:#0d1628; border-top:1px solid #1a2640; border-bottom:1px solid #1a2640 }
+    .section.bg-alt{ background:var(--bg2); border-top:1px solid var(--line); border-bottom:1px solid var(--line) }
+    .section.bg-solid{ background:var(--bg); border-top:1px solid var(--line); border-bottom:1px solid var(--line) }
     .card{
-      position:relative; border-radius:16px; padding:18px; background:#0c1424; color:#dbe7f3; border:1px solid transparent;
-      transition:transform .18s var(--e);
-      max-width:760px; margin-inline:auto
+      position:relative; border-radius:16px; padding:18px; background:var(--panel); color:var(--text); border:1px solid var(--line);
+      transition:transform .18s var(--e), box-shadow .18s var(--e), border-color .18s;
+      max-width:760px; margin-inline:auto; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
-    .card::before{
-      content:""; position:absolute; inset:0; border-radius:inherit; padding:1px;
-      background:linear-gradient(135deg, rgba(34,211,238,.35), rgba(34,211,238,.05));
-      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none
-    }
-    .card:hover{ transform:translateY(-2px) perspective(600px) rotateX(1.2deg) rotateY(.8deg) }
-    .card h3{ color:#22d3ee; margin:.2em 0 .3em; font-size:1.08rem }
-    .card p{ margin:.15em 0 .4em; line-height:1.6 }
-    code{ white-space:pre-wrap; word-break:break-word; overflow-wrap:anywhere }
+    .card:hover{ transform:translateY(-2px); border-color:var(--accent); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+    .card h3{ color:var(--text); margin:.2em 0 .3em; font-size:1.08rem; font-weight: 700; }
+    .card p{ margin:.15em 0 .4em; line-height:1.6; color:var(--muted); }
+    code{ white-space:pre-wrap; word-break:break-word; overflow-wrap:anywhere; background: var(--bg2); padding: 2px 4px; border-radius: 4px; border: 1px solid var(--line); font-size: 0.9em; color: var(--text); }
 
     #page-proof-hash{ display:inline-block; max-width:min(92vw, 980px); vertical-align:middle }
 
     .progress{
       position:fixed; left:0; top:64px; width:100%; height:2px;
-      background:linear-gradient(90deg, rgba(34,211,238,.0), rgba(34,211,238,.35));
+      background:var(--accent);
       transform-origin:left; scale:0 1; z-index:900
     }
 
@@ -253,18 +258,18 @@ upgrade-insecure-requests">
       border-top:1px solid var(--line);
       margin-top:44px;
       padding:18px;
-      color:#7c8aa5;
+      color:var(--muted);
       text-align:center;
-      background:#0b1020;
+      background:var(--bg2);
     }
     footer .badges{ display:flex; gap:8px; justify-content:center; margin:10px 0 }
     footer .badge{
       display:inline-flex; align-items:center; gap:6px;
       padding:6px 10px; border:1px solid var(--line); border-radius:999px;
-      background:#0d1628; font-size:.9rem; color:#cfefff; text-decoration:none
+      background:var(--bg); font-size:.9rem; color:var(--text); text-decoration:none; font-weight: 500;
     }
     footer .links a{
-      color:#cfefff;
+      color:var(--text);
       font-weight:600;
       text-underline-offset:3px;
       text-decoration:none;
@@ -277,15 +282,24 @@ upgrade-insecure-requests">
       display:inline-flex; width:40px; height:40px;
       border:1px solid var(--line); border-radius:12px;
       align-items:center; justify-content:center;
-      background:#0d1628; transition:transform .18s var(--e); color:#cfefff
+      background:var(--bg); transition:transform .18s var(--e), border-color .18s; color:var(--text)
     }
-    .social a:hover{ transform:translateY(-2px) }
+    .social a:hover{ transform:translateY(-2px); border-color:var(--accent); color:var(--accent); }
+
+    a:focus-visible, .cta:focus-visible, .cta-header:focus-visible, .tp-burger:focus-visible{
+      outline:2px solid var(--accent); outline-offset:2px; border-radius:12px;
+    }
 
     @media (max-width:899px){
       .hero{ padding-top:92px; padding-bottom:24px }
       .section{ padding:28px 0 }
+      .grid.three{ grid-template-columns:1fr }
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{ scroll-behavior:auto !important }
     }
   </style>
+  <noscript><style>.reveal{opacity:1 !important; transform:none !important}</style></noscript>
 </head>
 
 <body>
@@ -317,11 +331,11 @@ upgrade-insecure-requests">
 
   <main id="main" class="wrap" role="main">
     <section class="hero" aria-labelledby="hero-title">
-      <div class="label">Status: Draft v0.1 · Open Standard · Verification-first · Stateless</div>
+      <div class="label">Status: Public Draft v0.1 · Open Standard · Verification-first · Stateless</div>
       <h1 id="hero-title" class="title">Verifiable receipts for automated actions.</h1>
 
       <p class="subtitle">
-        Logs are internal and modifiable. 
+        System logs are internal and modifiable.
         ActProofs produces a cryptographic, portable receipt (<code>.actproof.json</code>) proving that a specific automated action was explicitly authorized by an identified actor in a defined context.
       </p>
 
@@ -344,10 +358,10 @@ upgrade-insecure-requests">
 
     <section class="section bg-alt" id="axiom" aria-labelledby="axiom-title">
       <h2 id="axiom-title">A log entry is not proof</h2>
-      <p style="text-align:center; color:#9fb3c9; max-width:900px; margin:0 auto 12px;">
+      <p style="text-align:center; color:var(--muted); max-width:900px; margin:0 auto 12px;">
         Execution logs are centralized and lack independent verifiability. An ActProof is a signed, portable artifact: it proves <strong>who</strong> authorized <strong>what</strong>, <strong>when</strong>, and in what <strong>context</strong>.
       </p>
-      <p style="text-align:center; color:#9fb3c9; max-width:860px; margin:0 auto;">
+      <p style="text-align:center; color:var(--muted); max-width:860px; margin:0 auto;">
         ActProofs doesn't execute or enforce. It fills the gap between access control and audit by certifying one fact: <strong>explicit authorization of an intent</strong>.
       </p>
     </section>
@@ -386,7 +400,7 @@ upgrade-insecure-requests">
     <section class="section bg-alt" id="examples" aria-labelledby="examples-title">
       <h2 id="examples-title">Examples of when a proof matters</h2>
 
-      <p style="text-align:center; color:#9fb3c9; max-width:900px; margin:0 auto 14px;">
+      <p style="text-align:center; color:var(--muted); max-width:900px; margin:0 auto 14px;">
         Situations where "this was authorized" must be indisputable:
       </p>
 
@@ -417,14 +431,14 @@ upgrade-insecure-requests">
         </article>
       </div>
 
-      <p style="text-align:center; margin-top:12px; color:#9fb3c9;">
+      <p style="text-align:center; margin-top:12px; color:var(--muted);">
         In these moments, a generic system log is not a verifiable proof.
       </p>
     </section>
 
     <section class="section bg-alt" aria-labelledby="how">
       <h2 id="how">How It Works</h2>
-      <p style="text-align:center; color:#9fb3c9; margin:-6px 0 12px">
+      <p style="text-align:center; color:var(--muted); margin:-6px 0 12px">
         Three steps: <strong>Define Context → Sign Authorization → Verify the Receipt</strong>
       </p>
 
@@ -463,20 +477,16 @@ upgrade-insecure-requests">
     <section class="section bg-alt" aria-labelledby="site-proof-title" id="site-proof">
       <p class="label" style="margin-bottom:8px">🔏 Proof of Release</p>
       <h2 id="site-proof-title">Verified by ActProofs</h2>
-      <p style="text-align:center; color:#9fb3c9; max-width:900px; margin:0 auto 12px;">
+      <p style="text-align:center; color:var(--muted); max-width:900px; margin:0 auto 12px;">
         We publish an authorization receipt for this website deployment, proving the build was authorized by the owner. Verification requires the proof file (<code>.actproof.json</code>).
       </p>
 
-      <p style="text-align:center; color:#9fb3c9">
+      <p style="text-align:center; color:var(--muted)">
         Release:
-        <span id="page-proof-release">…</span> ·
+        <span id="page-proof-release">v0.1</span> ·
         Hash:
-        <code id="page-proof-hash">…</code> ·
+        <code id="page-proof-hash">waiting for deployment...</code> ·
         <a id="page-proof-link" href="/verify.html" title="Open Create/Verify">Verify (upload proof)</a>
-      </p>
-
-      <p style="text-align:center; margin-top:6px; color:#9fb3c9">
-        Values are loaded from the v0.1 release manifest with audit history kept as an archive.
       </p>
     </section>
 
@@ -486,7 +496,7 @@ upgrade-insecure-requests">
         <a class="cta" href="/verify.html">Create / Verify a Proof</a>
         <a class="cta secondary" href="/governance.html">See Use Cases</a>
       </div>
-      <p style="text-align:center; color:#9fb3c9; margin-top:10px">
+      <p style="text-align:center; color:var(--muted); margin-top:10px">
         Looking for mission and transparency? See <a href="/about.html">About →</a>
       </p>
     </section>
