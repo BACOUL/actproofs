@@ -1,172 +1,159 @@
-# ActProofs
+ActSpec v0.1 — Proof of Authorization Standard
 
-**Specification version:** v0.1 (Draft)
+Status: Public Draft
+Version: v0.1
+Maintainer: ActProofs Foundation
 
-ActProofs is an open standard for **proof of authorization of automated actions**.
+ActSpec defines an open cryptographic standard for issuing and verifying proofs that an automated or AI-driven action was explicitly authorized by a responsible entity at a specific time and in a defined context.
 
-It produces a **cryptographic, portable, and independently verifiable receipt** proving that a specific automated action (notably involving AI) was explicitly authorized by an **identified actor or entity**, in a **defined context**, at a **specific point in time**.
+An ActProof is a cryptographic receipt. It records authorization intent, not execution.
 
-**ActProofs is best understood as a cryptographic receipt for authorizing automated actions.**
+WHAT THIS STANDARD SOLVES
 
-ActProofs is designed for **compliance**, **auditability**, **accountability**, and **governance** of automated and AI-driven systems.
+Modern systems rely on automation, AI agents, and CI/CD pipelines that can trigger actions with real-world impact. Execution logs exist, but they do not prove intent, approval, or responsibility.
 
----
+ActSpec fills this gap by providing portable, independently verifiable evidence that an authorization decision occurred.
 
-## WHY ACTPROOFS EXISTS
+WHAT ACTSPEC IS
 
-Modern systems increasingly rely on automated workflows and AI agents capable of triggering actions with real-world impact.
+- A cryptographic receipt format
+- A stateless verification protocol
+- A governance and compliance building block
+- An offline-verifiable proof mechanism
 
-Regulators, auditors, insurers, and governance teams are asking a fundamental question:
+WHAT ACTSPEC IS NOT
 
-> **Who authorized this automated action, and when?**
+- Not an execution engine
+- Not an IAM, SSO, or RBAC system
+- Not a policy engine
+- Not a workflow orchestrator
+- Not a logging system
+- Not a blockchain
 
-Today, the market provides only:
-- internal logs (mutable, non-portable, non-opposable),
-- IAM / RBAC systems (access control, not proof),
-- execution traces (post-hoc, incomplete),
-- blockchain-based approaches (heavy, misaligned, unnecessary).
+ActSpec never executes, blocks, or permits actions.
 
-There is **no standard, portable, opposable proof of authorization**.
+CORE PRINCIPLE
 
-**ActProofs fills this gap.**
+Authorization is not execution.
 
----
+ActSpec certifies that an authorization existed. It does not assert whether the action was correct, safe, or executed.
 
-## WHAT ACTPROOFS IS
+HIGH-LEVEL PROTOCOL FLOW
 
-ActProofs is:
-- a **standardized proof format** for authorization decisions,
-- a **cryptographic receipt** that can be stored, shared, and audited,
-- **stateless by design** (no server-side storage required),
-- **verification-first** (no implicit trust in the issuer),
-- a **compliance and governance building block**.
+1. The client defines an Authorization Manifest locally.
+2. The client canonicalizes the manifest.
+3. The client hashes the canonicalized manifest using SHA-256.
+4. The client sends only the hash to the ActProofs Issuer.
+5. The Issuer timestamps and signs a receipt.
+6. The ActProof is returned and can be verified offline.
 
-**Mental model:**
+At no point does the Issuer receive sensitive data, parameters, prompts, or PII.
 
-Identified actor → Authorization → **ActProof** → Action *(out of scope)*
+AUTHORIZATION MANIFEST
 
----
+The Authorization Manifest is client-owned and never transmitted in clear.
 
-## WHAT ACTPROOFS IS NOT
+It defines:
+- Who authorizes
+- What action is authorized
+- In which context
+- Under which constraints
 
-ActProofs does **not**:
-- execute actions,
-- trigger workflows,
-- enforce authorization,
-- manage identities,
-- authenticate users or systems,
-- replace IAM, RBAC, SSO, or PKI,
-- store logs or content,
-- rely on blockchain or distributed ledgers.
+The manifest is cryptographically bound to the real action via hashing.
 
-**ActProofs records authorization decisions only.**
+ACTPROOF RECEIPT
 
----
+The Issuer returns a signed ActProof containing:
+- Specification version
+- Unique proof ID
+- Timestamp of issuance
+- Manifest hash
+- Issuer identifier
+- Cryptographic signature
 
-## CORE PRINCIPLES
+The ActProof is a portable file that can be stored, shared, audited, and verified independently.
 
-### 1. Identified initiator  
-The actor, organization, or system authorizing the action is **known and explicitly declared**.
+CRYPTOGRAPHIC DESIGN
 
-### 2. No identity management  
-ActProofs records **declared identity context** but does **not** verify or manage identities.
+- Signature algorithm: Ed25519
+- Hash algorithm: SHA-256
+- Canonicalization: RFC 8785 JSON Canonicalization Scheme
+- Signature coverage includes:
+  spec
+  id
+  issued_at
+  manifest_hash
+  issuer
 
-### 3. No execution  
-Authorization proof is **independent from action execution**.
+Signing only the hash is insufficient and insecure.
 
-### 4. Stateless by design  
-No server-side storage is required to validate a proof.
+VERIFICATION RULES
 
-### 5. Independent verification  
-Any third party can verify an ActProof **without trusting the issuer**.
+A verifier must:
+- Enforce the spec version
+- Validate required fields
+- Separate payload from signature
+- Canonicalize payload using RFC 8785
+- Verify the Ed25519 signature using the Issuer public key
+- Optionally check revocation status
 
-### 6. Portable and durable  
-Proofs are **files**, not database records.
+Failure at any step invalidates the proof.
 
----
+STATELESS VERIFICATION
 
-## THE ACTPROOF (CONCEPT)
+ActSpec supports full offline verification.
+Only the ActProof file and the Issuer public key are required.
 
-An **ActProof** is a self-contained file (for example, `.actproof.json`) that cryptographically binds:
-- the **authorized action**,
-- the **identified authorizing actor or entity**,
-- the **context** (system, purpose, scope),
-- a **timestamp**,
-- a **digital signature**.
+REVOCATION MODEL
 
-The proof can be archived, shared, audited, or provided to regulators, insurers, or third parties.
+Cryptographic validity is immutable.
+Operational trust may change.
 
-Verification is possible **at any time**, without access to internal systems.
+A revoked proof remains mathematically valid but is flagged as operationally untrusted.
 
-The exact format and rules are defined by the **ActProofs specification**.
+TRUST BOUNDARY
 
----
+Client responsibilities:
+- Define authorization intent
+- Protect sensitive data
+- Store the Authorization Manifest
+- Map manifest hash to real-world action
 
-## REGULATORY ALIGNMENT
+Issuer responsibilities:
+- Timestamp integrity
+- Signature correctness
+- Tenant authentication
+- Public key governance
 
-ActProofs is designed to support requirements related to:
-- AI governance and accountability,
-- oversight of automated decisions,
-- audit and risk management,
-- cybersecurity and operational resilience,
-- insurance and liability assessment.
+ActProofs acts as a blind notary.
 
-It directly addresses a recurring regulatory expectation:
+COMPLIANCE ALIGNMENT
 
-> **Demonstrate that an automated action was explicitly authorized by a responsible entity.**
+ActSpec is designed to support:
+- EU AI Act (Human Oversight and Record-Keeping)
+- ISO/IEC 42001 (AI Risk Management)
+- GDPR Accountability principle
+- Audit, assurance, and governance workflows
 
-This is achieved **without** storing personal data, executing actions, or centralizing logs.
+TESTING AND CONFORMANCE
 
----
+An implementation is ActSpec v0.1 compliant if it:
+- Passes all official test vectors
+- Matches canonical payloads byte-for-byte
+- Rejects tampered timestamps and invalid signatures
 
-## TYPICAL USE CASES
+CANONICAL STATEMENT
 
-- Authorization of AI-driven actions before execution  
-- Approval of automated workflows in regulated environments  
-- Human-in-the-loop authorization evidence  
-- Audit trails for AI systems  
-- Insurance and liability documentation  
-- Governance of autonomous or semi-autonomous agents  
-- Approval records for critical system actions  
+ActProofs is a cryptographic receipt proving that an automated action was explicitly authorized by a responsible entity, at a specific time, in a defined context.
 
----
+STATUS
 
-## POSITIONING
+This specification is a public draft.
+Backward-incompatible changes may occur until version 1.0.
 
-ActProofs sits **between**:
-- identity and access management systems,
-- execution engines and automation platforms,
-- logging and monitoring tools.
+FINAL NOTE
 
-It acts as a **neutral, portable proof layer**.
+ActSpec does not replace existing systems.
+It provides the missing proof layer between authorization and execution.
 
-ActProofs is best described as:
-> **a receipt for authorizing an automated action.**
-
----
-
-## PROJECT STATUS
-
-- Specification: **v0.1 (Draft)**
-- Reference implementation: **In progress**
-- Target users: **B2B, compliance, audit, AI governance teams**
-
-ActProofs is developed as an **open standard**, designed for interoperability and long-term verifiability.
-
----
-
-## ROADMAP
-
-- **v0.1** — Draft specification and conceptual validation  
-- **v0.2** — Stabilized format, reference implementation, paid issuance  
-- **v1.0** — Stable standard suitable for contractual and audit references  
-
----
-
-## PHILOSOPHY
-
-No hype.  
-No blockchain.  
-No execution logic.  
-
-**Just provable authorization of automated actions.**
+Authorization without proof is liability.
